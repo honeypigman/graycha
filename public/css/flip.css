@@ -1,0 +1,58 @@
+/* 
+    Flip Animation @cjcu
+*/
+.flip-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    margin-right:20px;
+}
+    
+.flip-card:hover .flip-card-back {
+    transform: rotateY(0deg);
+}
+    
+.flip-card:hover .flip-card-front {
+    transform: rotateY(180deg);
+}
+
+.flip-card, .flip-card-front, .flip-card-back {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.flip-card-inner {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front, .flip-card-back {
+    backface-visibility: hidden;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.flip-card-front {
+    /* background-color: #dcdcdc; */
+    color: black;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 40px;
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.flip-card-back {
+    /* background-color: #909090; */
+    color: white;
+    border: 5px solid white;
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 30px;
+    transform: rotateY(180deg);
+}

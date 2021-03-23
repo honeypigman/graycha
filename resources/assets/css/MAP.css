@@ -1,0 +1,199 @@
+.map{
+  width: 100%; 
+  height: 100%; 
+  position: relative;
+}
+.marker {
+  display: inline-block;
+  position: relative;
+  width: 27px;
+  height: 27px;
+  margin-top: 12px;
+  padding: 3px;
+  line-height: 0;
+  border-radius: 50%;
+  background-color: rgba(90, 145, 235);
+  z-index: 999;
+}
+
+.marker:hover .marker-bg{
+  display:block;
+  width:45px;
+  height:45px;
+  margin-top: -5px;
+  margin-left: -4px;
+}
+
+.marker:hover .emoticon{
+  width:32px;
+  height:32px;
+  margin-top: -7px;
+  margin-left: -6px;
+  display: inline-block;
+}
+
+.emoticon{
+  width:23px;
+  height:23px;
+  margin-top: -1px;
+  margin-left: -1px;
+  display: inline-block;
+  background: no-repeat 50% 50%;
+  background-size: contain;
+  cursor:pointer;
+  z-index:-1;
+}
+
+.grade0 .emoticon{
+  background-image: url('/img/grade0.png');
+}
+.grade1 .emoticon{
+  background-image: url('/img/grade1.png');
+}
+.grade2 .emoticon{
+  background-image: url('/img/grade2.png');
+}
+.grade3 .emoticon{
+  background-image: url('/img/grade3.png');
+}
+.grade4 .emoticon{
+  background-image: url('/img/grade4.png');
+}
+.grade5 .emoticon{
+  background-image: url('/img/grade5.png');
+}
+.marker.grade0{
+  background-color: rgba(153, 153, 153);
+}
+.marker.grade1{
+  background-color: rgba(90, 145, 235);
+}
+.marker.grade2{
+  background-color: rgba(125, 186, 98);
+}
+.marker.grade3{
+  background-color: rgba(242, 174, 72);
+}
+.marker.grade4{
+  background-color: rgba(234, 80, 80);
+}
+.marker.grade5{
+  background-color: rgba(153, 153, 153);
+}
+.bg_grade0{
+  background-color: rgba(153, 153, 153, 0.9);
+}
+.bg_grade1{
+  background-color: rgba(90, 145, 235, 0.9);
+}
+.bg_grade2{
+  background-color: rgba(125, 186, 98, 0.9);
+}
+.bg_grade3{
+  background-color: rgba(242, 174, 72, 0.9);    
+}
+.bg_grade4{
+  background-color: rgba(234, 80, 80, 0.9);
+}
+.bg_grade5{
+  background-color: rgba(153, 153, 153, 0.9);
+}
+
+.marker-bg {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  top: -5px;
+  left: -6px;
+  z-index: -2;
+  border-radius: 50%;
+  opacity: 0.8;
+  display:none;
+}
+
+.option-bar{
+  display:flex;
+  float:left;
+  margin-left:5px;
+}
+
+.serach-bar{
+  position: absolute;
+  width: 300px;
+  right: 5px;
+  bottom: 25px;
+}
+
+#find-me{
+  position:absolute; 
+  width:32px; 
+  height:32px; 
+  background-color:#ffffff;
+  z-index: 2; 
+  margin-top: 40px;
+  border-radius: 0.3em;
+  cursor:pointer;
+  background-image: url(/img/point.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.img-center{
+  display: flex;
+  justify-content: center;
+  margin:8px;
+}
+
+.notice{
+  display:flex;
+  justify-content:center;
+  position: absolute;
+  width: 100%;
+  margin-bottom:10px;
+  padding: 4px;
+  font-size:0.8rem;
+  z-index: 10;
+}
+
+.markerDetail{
+  display:inline-block; 
+  position: relative; 
+  width:230px; 
+  z-index: 1; 
+  margin-top:40px; 
+  bottom:0px; 
+  right:5px; 
+  float:right;
+}
+
+.btnClose{
+  margin-top:-40px;
+  margin-bottom:-20px;
+}
+
+#submit{
+  cursor:pointer;
+}
+
+.alert{
+  padding: 0.5rem 0.5rem
+}
+
+.alert-danger{
+  margin-bottom: 2px;
+}
+
+.addr-bar{
+  display:flex;
+}
+
+.marker-pick{
+  margin-top: 0px;
+  margin-left: -12px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  border-radius: 50%;
+  border: dotted 3px rgba(255, 0, 0);
+}

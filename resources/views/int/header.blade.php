@@ -5,8 +5,9 @@
 <!doctype html>
 <html lang="ko">
   <head>
-    <meta property="og:title" content="GrayCha::미세도" />
+    <meta name="author" content="graycha">
     <meta property="og:type" content="website" />
+    <meta property="og:title" content="GrayCha" />
     <meta property="og:description" content="개인 프로젝트를 관리하는 공간입니다." class="next-head">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">

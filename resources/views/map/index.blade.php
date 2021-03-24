@@ -1,14 +1,16 @@
 <!doctype html>
 <html lang="ko">
   <head>
-    <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('MISEMAP') }} v{{ env('MISEMAP_VER') }}" />
+    <meta charset="UTF-8">
+    <meta name="description" content="전국 시도별 미세먼지 시간별 정보를 지도에서 확인하세요!">
+    <meta name="keywords" content="미세도, 미세먼지, 초미세먼지">
+    <meta name="author" content="graycha">
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="전국 시도별 미세먼지 시간별 정보를 지도에서 확인하세요!" class="next-head">
+    <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('MISEMAP') }} v{{ env('MISEMAP_VER') }}" />
+    <meta property="og:description" content="전국 시도별 미세먼지 시간별 정보를 지도에서 확인하세요!">
+    <meta property="og:url" content="https://www.graycha.net/map/misedo">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
     <title>{{ env('MISEMAP') }} v{{ env('MISEMAP_VER') }}</title>
     <script src="/js/jquery.min.js"></script>
     <link href="{{ mix('/css/common.css') }}" rel="stylesheet">

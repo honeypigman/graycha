@@ -5,12 +5,17 @@
 <!doctype html>
 <html lang="ko">
   <head>
+    <title>{{ env('APIMNG') }} v{{ env('APIMNG_VER') }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="graycha">
+    <meta name="description" content="OpenAPI Manager">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ env('APIMNG') }}" />
+    <meta property="og:description" content="개인 프로젝트를 관리하는 공간입니다." class="next-head">
+    <meta property="og:url" content="{{ env('APIMNG_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <title>{{ env('APIMNG') }} v{{ env('APIMNG_VER') }}</title>
     <script src="/js/jquery.min.js"></script>
     <link href="{{ mix('/css/common.css') }}" rel="stylesheet">
     <link href="/css/flip.css" rel="stylesheet">

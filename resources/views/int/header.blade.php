@@ -5,15 +5,17 @@
 <!doctype html>
 <html lang="ko">
   <head>
+    <title>{{ env('APP_NAME') }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="graycha">
+    <meta name="description" content="개인 프로젝트를 관리하는 공간입니다.">
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="GrayCha" />
+    <meta property="og:title" content="{{ env('APP_NAME') }}" />
     <meta property="og:description" content="개인 프로젝트를 관리하는 공간입니다." class="next-head">
+    <meta property="og:url" content="{{ env('APP_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ env('APP_NAME') }}</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/graycha.css" rel="stylesheet">
     @if(env('APP_ENV') == 'P')

@@ -124,6 +124,13 @@
   bottom: 25px;
 }
 
+.count{
+  position: absolute;
+  left: 47px;
+  bottom: 25px;
+  font-size: 0.98em;
+}
+
 #find-me{
   position:absolute; 
   width:32px; 
@@ -196,4 +203,10 @@
   display: flex;
   border-radius: 50%;
   border: dotted 3px rgba(255, 0, 0);
+}
+
+.zommio{
+  right: 0px;
+  position: absolute;
+  bottom: 83px;
 }

@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <div class="card-body">
                     <h5 class="card-title">
-                      <a href="/map/misemap" target="_blank">
+                      <a href="/map/misedo" target="_blank">
                         <button type="button" class="btn btn-outline-secondary w-100">미세도 v1.0</button>
                       </a>
                     </h5>

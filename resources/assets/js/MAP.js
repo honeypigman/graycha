@@ -38,6 +38,24 @@ $(document).ready(function(){
             findStation();
         }
     });
+
+    // Zoom In
+    $("#btn-zoom-in").on("click", function(){
+        var delta = 0,
+        zoom = map.getZoom();
+        console.log("out>"+zoom);
+        delta = zoom+1;
+        map.zoomBy(delta, new naver.maps.LatLng(), 0);
+    });
+    // Zoom Out
+    $("#btn-zoom-out").on("click", function(){
+        var delta = 0,
+        zoom = map.getZoom();
+
+        console.log("out>"+zoom);
+        map.zoomBy(5, new naver.maps.LatLng(), 0);
+    });
+
 });
 
 
@@ -46,7 +64,16 @@ var initPoint = new naver.maps.LatLng(37.572025, 127.005028);
 var mapDiv = document.getElementById('map');
 var map = new naver.maps.Map(mapDiv, {
     center: initPoint,
-    zoom: 5
+    zoom: 5,
+    zoomControl: true,
+    zoomControlOptions: {
+        style: naver.maps.ZoomControlStyle.SMALL,
+        position: naver.maps.Position.LEFT_BOTTOM
+    },
+    mapDataControl: true,
+    mapDataControlOptions: {
+        position: naver.maps.Position.LEFT_BOTTOM
+    }
 });
 var spinnerBtn= "<div class='spinner-border spinner-border-sm img-center' role='status'><span class='visually-hidden'>Loading...</span></div> ";
 
@@ -332,14 +359,14 @@ function searchAddressToCoordinate(address)
             setAlert('검색한 Geocode정보가 ['+address+']가 올바르지 않습니다.');
             // Spinner Reset
             spinner('submit', '검색');
-            return false;
+            return click=false;
         }
 
         if (response.v2.meta.totalCount === 0) {
             setAlert('검색한 정보 ['+address+']가 올바르지 않습니다.');
             // Spinner Reset
             spinner('submit', '검색');
-            return false;
+            return click=false;
         }
 
         

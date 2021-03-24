@@ -14,35 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ env('APP_NAME') }}</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      .logo{
-        width: 2.2em;
-        padding: 5px;
-      }
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      .Progress {
-          display: flex;
-          height: 8px;
-          overflow: hidden;
-          background-color: var(--color-auto-gray-2);
-          border-radius: 6px;
-          outline: 1px solid transparent;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-        .card-text{
-          height:145px;
-        }
-      }
-    </style>
+    <link href="/css/graycha.css" rel="stylesheet">
+    @if(env('APP_ENV') == 'P')
+      @include('cmm.googletagmanager')
+    @endif
   </head>
   
   <body>

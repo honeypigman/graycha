@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ env('APIMNG') }} v{{ env('APIMNG_VER') }}</title>
     <script src="/js/jquery.min.js"></script>
     <link href="{{ mix('/css/common.css') }}" rel="stylesheet">
     <link href="/css/flip.css" rel="stylesheet">

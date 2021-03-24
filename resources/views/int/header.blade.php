@@ -14,6 +14,7 @@
     <meta property="og:title" content="{{ env('APP_NAME') }}" />
     <meta property="og:description" content="개인 프로젝트를 관리하는 공간입니다." class="next-head">
     <meta property="og:url" content="{{ env('APP_URL') }}">
+    <meta property="og:img" content="{{ env('APP_IMG') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="/css/bootstrap.min.css" rel="stylesheet">

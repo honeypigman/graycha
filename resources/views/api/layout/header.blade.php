@@ -11,7 +11,7 @@
     <meta name="author" content="graycha">
     <meta name="description" content="OpenAPI Manager">
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ env('APIMNG') }}" />
+    <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('APIMNG') }}" />
     <meta property="og:description" content="OpenApi관리하는 공간입니다." class="next-head">
     <meta property="og:url" content="{{ env('APIMNG_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">

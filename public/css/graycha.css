@@ -1,27 +1,31 @@
 .logo{
-    width: 2.2em;
-    padding: 5px;
+  width: 2.2em;
+  padding: 5px;
+}
+.sns-icons{
+  float:left; 
+  margin:3px;
+}
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.Progress {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    background-color: var(--color-auto-gray-2);
+    border-radius: 6px;
+    outline: 1px solid transparent;
+}
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
   }
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+  .card-text{
+    height:145px;
   }
-  .Progress {
-      display: flex;
-      height: 8px;
-      overflow: hidden;
-      background-color: var(--color-auto-gray-2);
-      border-radius: 6px;
-      outline: 1px solid transparent;
-  }
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-    .card-text{
-      height:145px;
-    }
-  }
+}

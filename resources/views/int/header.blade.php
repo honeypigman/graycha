@@ -9,10 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="graycha">
-    <meta name="description" content="개인 프로젝트와 아이디어를 기록하는 공간입니다.">
+    <meta name="description" content="개인 프로젝트와 생각을 기록하는 공간입니다.">
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ env('APP_NAME') }}" />
-    <meta property="og:description" content="개인 프로젝트와 아이디어를 기록하는 공간입니다." class="next-head">
+    <meta property="og:description" content="개인 프로젝트와 생각을 기록하는 공간입니다." class="next-head">
     <meta property="og:url" content="{{ env('APP_URL') }}">
     <meta property="og:img" content="{{ env('APP_IMG') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">

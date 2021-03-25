@@ -183,6 +183,11 @@ function setChartStationTimeFlow(date, city, station){
         success : function(rs){
             var jsonStringify = JSON.stringify(rs);
             
+            $.each(rs, function(){
+                obj_label.push((this.time).substring(0.2));
+                obj_pm10.push(this['data']['pm10']);
+                obj_pm25.push(this['data']['pm25']);
+            });
             // Default
             obj_pm10.push(30);
             obj_pm10.push(81);
@@ -190,11 +195,6 @@ function setChartStationTimeFlow(date, city, station){
             obj_pm25.push(15);
             obj_pm25.push(36);
             obj_pm25.push(76);
-            $.each(rs, function(){
-                obj_label.push((this.time).substring(0.2));
-                obj_pm10.push(this['data']['pm10']);
-                obj_pm25.push(this['data']['pm25']);
-            });
             
             // Chart reset            
             $('#myChart').remove();

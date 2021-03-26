@@ -178,7 +178,7 @@ class ApiController extends Controller
      */
     public function index($type='json')
     {
-        $result = KairspecApiHis::orderBy('reqdate', 'desc')->get();        
+        $result = KairspecApiHis::orderBy('date', 'desc')->get();        
 
         if($type=='json'){
             return $result = $result->toJson(JSON_UNESCAPED_UNICODE);
@@ -224,7 +224,8 @@ class ApiController extends Controller
                 $custom = json_encode($_CUST, JSON_UNESCAPED_UNICODE);
 
                 $api = new KairspecApiHis();
-                $api->reqdate = date('Y-m-d H:i:s');
+                $api->date = date('Y-m-d');
+                $api->time = date('H:i:s');
                 $api->operation = $operation;
                 $api->origin = $result;
                 $api->custom = $custom;

@@ -45,7 +45,7 @@ class MapController extends Controller
                 // ->count();
                 // if($cnt>0)
 
-                if(empty($_MARKER[$datas['stationName']]) && substr($datas['time'],0,2)==date('H'))
+                if(empty($_MARKER[$datas['stationName']]) && ( substr($datas['time'],0,2)==date('H') || substr($datas['time'],0,2)==date('H', strtotime('-1 hours'))))
                 {
                     // Set Grade Info
                     $getInfo = Func::getGrade($datas['pm10Value'], $datas['pm25Value']);

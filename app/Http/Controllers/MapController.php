@@ -17,6 +17,9 @@ class MapController extends Controller
         if($code == "misedo"){
 
             $today = date('Y-m-d');
+            if(env('APP_ENV')=='D'){
+                $today = "2021-03-22";
+            }
             $obj = MisedoCount::where('today',$today)->count();
             if($obj>0){
                 MisedoCount::where('today',$today)->increment('count', 1);
@@ -34,13 +37,15 @@ class MapController extends Controller
 
             $_MARKER = Array();
             foreach($list as $datas){
-
-                $cnt = KairspecApiStationList::where('date', '=', substr($datas['mesure_time'],0,10))
-                ->where('city', $datas['city'])
-                ->where('stationName', $datas['stationName'])
-                ->count();
                 
-                if($cnt>0)
+                // 쿼리 향상을 위해 하단 조건문으로 변경
+                // $cnt = KairspecApiStationList::where('date', '=', substr($datas['mesure_time'],0,10))
+                // ->where('city', $datas['city'])
+                // ->where('stationName', $datas['stationName'])
+                // ->count();
+                // if($cnt>0)
+
+                if(empty($_MARKER[$datas['stationName']]) && substr($datas['time'],0,2)==date('H', strtotime('-1 hours')))
                 {
                     // Set Grade Info
                     $getInfo = Func::getGrade($datas['pm10Value'], $datas['pm25Value']);

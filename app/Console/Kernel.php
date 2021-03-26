@@ -45,6 +45,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // KairSpec DB초기화
+        $schedule->command('kairspec:resetThreeDays')->daily();
         // KairSpec 전체 측정소 데이터 획득
         $schedule->command('kairspec:getMsrstnInfoAll')->daily();
         // KairSpec 시도별 측정소 정보 획득

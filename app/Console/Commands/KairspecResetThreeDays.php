@@ -61,5 +61,13 @@ class KairspecResetThreeDays extends Command
             KairspecApiStationList::where('date', '<', $delday)->delete();
             Log::info('SCH KairspecResetThreeDays-KairspecApiStationList Del - OK');
         }
+
+        // API His
+        $cnt = KairspecApiHis::where('date', '<', $delday)->count();
+        Log::info('SCH KairspecResetThreeDays-KairspecApiHis Del - '.$delday.'/'.$cnt);
+        if($cnt>0){
+            KairspecApiHis::where('date', '<', $delday)->delete();
+            Log::info('SCH KairspecResetThreeDays-KairspecApiHis Del - OK');
+        }
     }
 }

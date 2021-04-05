@@ -114,7 +114,7 @@ function fn_SettingLevel(_level) {
     } else if (_level == 3) {
         MAX_WIDTH = 16;
         MAX_HEIGHT = 10;
-        MAX_WIDTH_DISTANCE = 49;
+        MAX_WIDTH_DISTANCE = 48;
         MAX_HEIGHT_DISTANCE = 48;
     }
     

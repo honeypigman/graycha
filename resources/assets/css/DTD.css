@@ -1,0 +1,61 @@
+body{
+    padding:5px;
+    width: 794px;
+}
+li{
+    list-style: none;
+}
+.alert{
+    padding:6px;
+}
+.header{
+    margin-bottom:-12px;            
+}
+.area-top{
+    position: relative;
+    width: 782px;
+    height: 490px;
+}
+.area-bottom{
+    position: relative; 
+    width: 782px; 
+    height: 490px;
+}
+canvas{
+    border:1px solid;
+    min-width:782px;
+}
+.options{
+    position: absolute;
+    left: 775px;
+}        
+.samples{
+    position: absolute;
+    left: 810px;
+    top: 400px;
+}
+.views{
+    position: absolute;
+    left:865px;
+    top:40px;
+    font-weight:bold;
+    font-size:0.78em;
+}
+.background-dot { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+}        
+.dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: black;
+}        
+.dot:hover {
+    cursor:pointer;
+    background-color: #ffb52b;
+}

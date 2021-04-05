@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthCheck;
 use App\Func\Board;
 
-/**
- * Index
- */
+// Index
 Route::get('/', 'Controller@main');
+
+// Api Manager
 Route::get('/manager', 'ApiController@main');
 Route::get('/api/{api_code}', 'ApiController@setForm');
 Route::post('/send', 'ApiController@send');
+
+// Map
 Route::get('/map/{api}', 'MapController@index');
+
+// Kids
+Route::get('/kids/dtd', 'KidsController@dtd');
+Route::post('/kids/dtd/save', 'KidsController@dtdSave');
+Route::post('/kids/dtd/sample', 'KidsController@dtdSampleList');

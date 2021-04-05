@@ -46,6 +46,25 @@
           </div>
         </div>
 
+        <!-- Dot To Dot -->
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="/kids/dtd" target="_blank">
+                        <button type="button" class="btn btn-outline-secondary w-100">Dot TO Dot v1.0</button>
+                      </a>
+                    </h5>
+                    <p class="card-text">
+                        Canvas를 이용한 Dot To Dot 생성기
+                    </p>
+                    <div></div>
+                </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Watting.. -->
       </div>
     </div>

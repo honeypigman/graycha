@@ -31,6 +31,7 @@ $(document).ready(function() {
     fn_SettingSampleList();
     
     $(".level").click(function() {
+        $("#title").val('');
         $(".level").removeClass('active');
         $(this).addClass('active');
         fn_SettingLevel($(this).attr("level"));

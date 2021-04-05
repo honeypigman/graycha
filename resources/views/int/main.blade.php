@@ -15,7 +15,7 @@
                       </a>
                     </h5>
                     <p class="card-text">
-                        공공데이터포털(www.data.go.kr)을 통해, 전국 시도별 측정소로부터 실시간 대기오염 측정정보를 수신 받아, 미세먼지와 초미세먼지 농도의 시간별 정보를 지도에 표시해주는 서비스
+                        공공데이터포털(www.data.go.kr)을 통해, 전국 시도별 측정소로부터 실시간 대기오염 측정정보를 수신 받아, 미세먼지와 초미세먼지 농도의 시간별 정보를 지도에 표시해주는 서비스입니다.
                     </p>
                     <div>
                       <!-- <a href="https://github.com/honeypigman/kairspec" target="_blank" class="text-white">
@@ -38,7 +38,7 @@
                       </a>
                     </h5>
                     <p class="card-text">
-                        Open API 송수신 데이터를 인터페이스화하여 관리하는 서비스
+                        Open API 송수신 데이터를 인터페이스화하여 관리하는 서비스입니다.
                     </p>
                     <div></div>
                 </div>
@@ -53,11 +53,11 @@
                 <div class="card-body">
                     <h5 class="card-title">
                       <a href="/kids/dtd" target="_blank">
-                        <button type="button" class="btn btn-outline-secondary w-100">Dot TO Dot v1.0</button>
+                        <button type="button" class="btn btn-outline-secondary w-100">점보드v1.0</button>
                       </a>
                     </h5>
                     <p class="card-text">
-                        Canvas를 이용한 Dot To Dot 생성기
+                      점과 점을 이어 자유롭게 생각을 펼쳐주세요. 아이와 함께 자유롭고 창의적인 생각을 할 수 있는  홈스쿨링 서비스입니다.
                     </p>
                     <div></div>
                 </div>

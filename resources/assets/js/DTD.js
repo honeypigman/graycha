@@ -256,6 +256,7 @@ function fn_DrawLineAll() {
 
 function fn_SettingCanvas(level, array){
     
+    $('html').scrollTop(0);
     fn_SettingLevel(level);
 
     // Set Array

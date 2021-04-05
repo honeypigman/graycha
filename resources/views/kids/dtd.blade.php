@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="graycha">
-    <meta name="description" content="홈스쿨링::점 따라 그리기-아이와 함께 자유롭게 생각을 펼쳐보세요.">
+    <meta name="description" content="홈스쿨링::점보드-점과 점을 이어 자유롭게 선을 그려 출력한 후, 아이가 따라 그릴 수 있게해주세요.">
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ env('APP_NAME') }}" />
     <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('DTD') }} v{{ env('DTD_VER') }}" />
-    <meta property="og:description" content="홈스쿨링::점 따라 그리기-아이와 함께 자유롭게 생각을 펼쳐보세요.">
+    <meta property="og:description" content="홈스쿨링::점보드-점과 점을 이어 자유롭게 선을 그려 출력한 후, 아이가 따라 그릴 수 있게해주세요.">
     <meta property="og:url" content="{{ env('DTD_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">

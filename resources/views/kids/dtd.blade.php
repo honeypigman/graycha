@@ -23,8 +23,11 @@
     <div class="header">
         <div class="alert alert-dark" role="alert">
             <div class="row">
-                <div class="col-12">
+                <div class="col-11">
                     <span class="text-start" style="display:flex;"><input type="text" id="title" name="title" value="" class="form-control w-100 text-start" placeholder="주제를 입력해 주세요! 점과 점을 클릭하여, 자유롭게 선을 만들어 주세요!" maxlength="10"></span>
+                </div>
+                <div class="col-1">
+                    <a href="https://graycha.tistory.com/119" target="_blank"><img class="logo" src="/img/grade1.png"/ style="width:40px;"></a>
                 </div>
             </div>
         </div>

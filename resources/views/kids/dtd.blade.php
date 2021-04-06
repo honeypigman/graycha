@@ -55,9 +55,9 @@
 </div>
 <div class="options">
     <ul>
-        <li><button type="button" level="1" class="level btn btn-outline-success mb-1 w-100 active">Easy</button></li>
-        <li><button type="button" level="2" class="level btn btn-outline-primary mb-1 w-100">Normal</button></li>
-        <li><button type="button" level="3" class="level btn btn-outline-danger mb-1 w-100">Hard</button></li>
+        <li><button type="button" level="1" class="level btn btn-outline-success mb-1 w-100 active">쉬움</button></li>
+        <li><button type="button" level="2" class="level btn btn-outline-primary mb-1 w-100">보통</button></li>
+        <li><button type="button" level="3" class="level btn btn-outline-danger mb-1 w-100">어려움</button></li>
         &nbsp;
         <li>
             <button type="button" level="0" class="show-option pre btn btn-outline-secondary w-100 float-start">

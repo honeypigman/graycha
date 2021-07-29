@@ -63,16 +63,17 @@ class KairspecMsrstnAll extends Command
             // 기본변수
             $today = date('Y-m-d');
             $time = date('H:i:s');
-            
-            $_DATA['uri'] = "http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc";
-            $_DATA['setUri'] = "http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getMsrstnList";
+
+            $_DATA['uri'] = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc";
+            $_DATA['setUri'] = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getMsrstnList";
             $_DATA['data'] = Array(
                 "serviceKey"=>env('API_KEY_KAIRSPEC'),
                 "numOfRows"=>"9999",
                 "pageNo"=>"1",
-                "addr"=>$cityName,
+                "addr"=>urlencode($cityName),
                 "stationName"=>" "
             );
+
             $_DATA['setDatabase'] = "getMsrstnList";
             $url = Form::getReqUrl($_DATA);
 

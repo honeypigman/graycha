@@ -56,6 +56,7 @@ class ApiController extends Controller
         if(empty($url)){
             abort(404);
         }
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 0);

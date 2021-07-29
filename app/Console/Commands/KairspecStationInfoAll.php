@@ -67,15 +67,21 @@ class KairspecStationInfoAll extends Command
             $time = date('H:i:s');
 
             //  API - 전체 측정소 목록 (KairspecCtprvnRltmMesureDnsty) - 시작
-            $_DATA['uri'] = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc";
-            $_DATA['setUri'] = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
+            // - 버전을 포함하지 않고 호출할 경우 : PM2.5 데이터가 포함되지 않은 원래 오퍼레이션 결과 표출.
+            // - 버전 1.0을 호출할 경우 : PM2.5 데이터가 포함된 결과 표출.
+            // - 버전 1.1을 호출할 경우 : PM10, PM2.5 24시간 예측이동 평균데이터가 포함된 결과 표출.
+            // - 버전 1.2을 호출할 경우 : 측정망 정보 데이터가 포함된 결과 표출.
+            // - 버전 1.3을 호출할 경우 : PM10, PM2.5 1시간 등급 자료가 포함된 결과 표출
+            $_DATA['uri'] = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc";
+            $_DATA['setUri'] = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
             $_DATA['data'] = Array(
                 "serviceKey"=>env('API_KEY_KAIRSPEC'),
                 "numOfRows"=>"9999",
                 "pageNo"=>"1",
-                "sidoName"=>$cityName,
+                "sidoName"=>urlencode($cityName),
                 "ver"=>"1.3"
             );
+
             $_DATA['setDatabase'] = "getCtprvnRltmMesureDnsty";
             $url = Form::getReqUrl($_DATA);
 
@@ -89,6 +95,9 @@ class KairspecStationInfoAll extends Command
             foreach( $_ARR['body']['items'] as $item=>$datas ){
                 foreach($datas as $cols){
                     unset($cnt, $ex_date);
+                    if(empty($cols['dataTime'])){
+                        $cols['dataTime']="0000-00-00 00:00";
+                    } 
                     $ex_date = explode(' ', $cols['dataTime']);
 
                     // Station List Chk

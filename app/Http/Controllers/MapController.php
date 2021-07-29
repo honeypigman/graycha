@@ -18,7 +18,7 @@ class MapController extends Controller
 
             $today = date('Y-m-d');
             if(env('APP_ENV')=='D'){
-                $today = "2021-03-22";
+                //$today = "2021-03-22";
             }
             $obj = MisedoCount::where('today',$today)->count();
             if($obj>0){

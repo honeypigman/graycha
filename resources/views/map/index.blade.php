@@ -52,11 +52,9 @@
   <script src="/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ env('NAVER_MAPS_CLIENT_ID') }}&submodules=geocoder"></script>
-  <script src="{{ mix('/js/map.js') }}"></script>
+  <!-- <script src="{{ mix('/js/map.js') }}"></script> -->
+  <script src="/js/MAP.js"></script>
   <script>
-    $(".count").on('click',function(){
-      alert(1);
-    });
     // Create Marker 
     @foreach( $marker as $stationName => $datas )
       //var content = "<div class='text-start'>미세먼지 : {{ $datas['mesure_pm10'] }} ㎍/m³</div><div class='text-start'>초미세먼지 : {{ $datas['mesure_pm25']}} ㎍/m³</div>";

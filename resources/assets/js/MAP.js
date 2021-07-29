@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-    findStation('AUTO');
-    
     // Marker
     $(".marker").parent('div').on('mouseover', function(){
         $(this).css("z-index", "999");

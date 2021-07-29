@@ -12,7 +12,7 @@ use App\Http\Controllers\ApiController;
 // Model
 use App\KairspecApiMsrstnList;
 use App\KairspecApiStationList;
-use App\KairspecApiStationNotFoundList;
+//use App\KairspecApiStationNotFoundList;
 
 // 시도별 실시간 측정소정보 조회
 //  - 배치주기 : Hourly
@@ -169,12 +169,12 @@ class KairspecStationInfoAll extends Command
                     }else{
                         Log::info("ERR>Invalid Station Name > ".$cityName."/".$today."/".$cols['stationName']);
                         
-                        $api = new KairspecApiStationNotFoundList();
-                        $api->today = $today;
-                        $api->time = $time;
-                        $api->city = $cityName;
-                        $api->stationName = $cols['stationName'];
-                        $api->save();
+                        // $api = new KairspecApiStationNotFoundList();
+                        // $api->today = $today;
+                        // $api->time = $time;
+                        // $api->city = $cityName;
+                        // $api->stationName = $cols['stationName'];
+                        // $api->save();
                     }
                 }
             }

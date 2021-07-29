@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    findStation('AUTO');
+    
     // Marker
     $(".marker").parent('div').on('mouseover', function(){
         $(this).css("z-index", "999");
@@ -341,7 +343,7 @@ function findStation(div='AUTO', x=null, y=null)
         });
     }        
     function error() {
-        alert('ERR>Unable to retrieve your location.');
+        alert('위치정보를 활성화 해주세요');
         click=false;
     }
 

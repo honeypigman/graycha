@@ -17,7 +17,7 @@
     <link href="{{ mix('/css/common.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/map.css') }}" rel="stylesheet">
     @if(env('APP_ENV') == 'P')
-      @include('cmm.googletagmanager')
+      <!-- @include('cmm.googletagmanager') -->
     @endif
 </header>
 <body class="text-center">

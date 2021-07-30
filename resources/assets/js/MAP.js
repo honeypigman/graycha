@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    //findStation('AUTO');
+    findStation('AUTO');
     
     // Marker
     $(".marker").parent('div').on('mouseover', function(){

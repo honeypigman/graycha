@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Sitemap: http://www.graycha.net/sitemap.xml
+
+User-agent: CuteStat 
+Disallow: /

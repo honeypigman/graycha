@@ -30,3 +30,10 @@ Route::get('/map/{api}', 'MapController@index');
 Route::get('/kids/dtd', 'KidsController@dtd');
 Route::post('/kids/dtd/save', 'KidsController@dtdSave');
 Route::post('/kids/dtd/sample', 'KidsController@dtdSampleList');
+
+// Blog
+Route::get('/blper', 'BlperController@index');
+Route::post('/blper/find', 'BlperController@find');
+Route::get('/blper/issue', 'BlperController@issue');
+Route::get('/blper/keyword', 'BlperController@keyword');
+// Route::post('/blper/crawling/{site}', 'BlperController@crawling');

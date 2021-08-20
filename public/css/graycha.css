@@ -1,3 +1,29 @@
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body{
+  height: 100%;
+}
+header{
+  height: 70px;
+  width: 100%;
+}
+main{
+  height: auto;
+  min-height: 100%;
+}
+footer{
+  left: 0;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  font-size: .8571rem;
+  position: relative;
+  background-color: #dfdfdf;
+}
 .logo{
   width: 2.2em;
   padding: 5px;

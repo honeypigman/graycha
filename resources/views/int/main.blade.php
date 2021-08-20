@@ -10,17 +10,14 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <div class="card-body">
                     <h5 class="card-title">
-                      <a href="/map/misedo" target="_blank">
-                        <button type="button" class="btn btn-outline-secondary w-100">미세도 v1.0</button>
+                      <a href="{{ env('MISEDO_URL') }}" target="_blank">
+                        <button type="button" class="btn btn-outline-secondary w-100">{{env('MISEDO')}} v{{env('MISEDO_VER')}}</button>
                       </a>
                     </h5>
                     <p class="card-text">
                         공공데이터포털(www.data.go.kr)을 통해, 전국 시도별 측정소로부터 실시간 대기오염 측정정보를 수신 받아, 미세먼지와 초미세먼지 농도의 시간별 정보를 지도에 표시해주는 서비스입니다.
                     </p>
                     <div>
-                      <!-- <a href="https://github.com/honeypigman/kairspec" target="_blank" class="text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github "><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                      </a> -->
                     </div>
                 </div>
             </div>
@@ -33,8 +30,8 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <div class="card-body">
                     <h5 class="card-title">
-                      <a href="/manager" target="_blank">
-                        <button type="button" class="btn btn-outline-secondary w-100">API Manager v1.0</button>
+                        <a href="{{ env('APIMNG_URL') }}" target="_blank">
+                        <button type="button" class="btn btn-outline-secondary w-100">{{env('APIMNG')}} v{{env('APIMNG_VER')}}</button>
                       </a>
                     </h5>
                     <p class="card-text">
@@ -52,12 +49,31 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <div class="card-body">
                     <h5 class="card-title">
-                      <a href="/kids/dtd" target="_blank">
-                        <button type="button" class="btn btn-outline-secondary w-100">점보드v1.0</button>
+                      <a href="{{ env('DTD_URL') }}" target="_blank">
+                        <button type="button" class="btn btn-outline-secondary w-100">{{env('DTD')}} v{{env('DTD_VER')}}</button>
                       </a>
                     </h5>
                     <p class="card-text">
-                      점과 점을 이어 자유롭게 선을 그려 출력한 후, 아이가 따라 그릴 수 있게하는 홈스쿨링 서비스입니다.
+                      점과 점을 이어 자유롭게 선을 그릴 수 있는 서비스입니다.
+                    </p>
+                    <div></div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Searching -->
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="{{env('BLPER_URL')}}" target="_blank">
+                        <button type="button" class="btn btn-outline-secondary w-100">{{env('BLPER')}} v{{env('BLPER_VER')}}</button>
+                      </a>
+                    </h5>
+                    <p class="card-text">
+                      블로그 포스팅을 위한 도우미 서비스로, 실시간 키워드 및 이슈정보를 제공하며, 키워드 검색을 위한 다음과 네이버 검색 결과를 요약하여 출력합니다.
                     </p>
                     <div></div>
                 </div>

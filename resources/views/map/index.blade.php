@@ -10,7 +10,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('MISEDO') }} v{{ env('MISEDO_VER') }}" />
     <meta property="og:description" content="전국 시도별 미세먼지 정보를 시간대별로 지도에서 확인하세요!">
-    <meta property="og:url" content="{{ env('MISEDO_URL') }}">
+    <meta property="og:url" content="{{ env('APP_URL') }}{{ env('MISEDO_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="/js/jquery.min.js"></script>

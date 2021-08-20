@@ -33,8 +33,12 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        // Kairspec
         \App\Console\Commands\KairspecMsrstnAll::class,
-        \App\Console\Commands\KairspecStationInfoAll::class
+        \App\Console\Commands\KairspecStationInfoAll::class,
+
+        // Blper
+        \App\Console\Commands\RssKoreaIssue::class
     ];
 
     /**
@@ -51,6 +55,12 @@ class Kernel extends ConsoleKernel
         $schedule->command('kairspec:getMsrstnInfoAll')->daily();
         // KairSpec 시도별 측정소 정보 획득
         $schedule->command('kairspec:getStationInfoAll')->hourlyAt(15);
+
+        
+        // Blper 실시간 키워드정보 취득 - 구글 트랜드 / 매시간 업데이트
+        $schedule->command('blper:getRssGoogleTrend')->hourlyAt(5); 
+        // Blper 실시간 이슈정보 취득 - 한국 정책 브리핑 / 매시간 37분 업데이트
+        $schedule->command('blper:getRssKoreaIssue')->hourlyAt(40); 
     }
 
     /**

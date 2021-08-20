@@ -9,7 +9,7 @@
     <meta name="author" content="graycha">
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('BLPER') }} v{{ env('BLPER_VER') }}" />
-    <meta property="og:image" content="{{ env('BLPER_URL') }}/img/or.png">
+    <meta property="og:image" content="{{ env('BLPER_OR_IMG') }}">
     <meta property="og:description" content="블퍼::블로그 포스팅 도우미 도우미">
     <meta property="og:url" content="{{ env('BLPER_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">

@@ -23,7 +23,7 @@
 <header>
   <div class="navbar navbar-dark bg-primary">
     <div class="container">
-      <a href="#" class="navbar-brand bg-primary d-flex align-items-center" style="box-shadow:none;">
+      <a href="{{ env('BLPER_URL') }}" class="navbar-brand bg-primary d-flex align-items-center" style="box-shadow:none;">
         <div>Blper v1.0 - Blog + Helper</div>
       </a>
     </div>

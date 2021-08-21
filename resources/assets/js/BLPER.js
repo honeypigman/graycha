@@ -208,14 +208,13 @@ $(document).ready(function(){
                 var cnt = 1;
                 var list = "";
                 $.each(rs['items'], function(){
-                var setDate = new Date(this.date);
 
                 // Set Card
                 list+="<div class='item-list' data-site='"+(this.site)+"' data-title=\""+this.title+"\" data-link='"+this.link+"'>";
                 list+="<span class='item-skip' title='" +(this.title)+ "'>";
                 list+="<img class='list_log'src='/img/icon/logo-"+(this.site)+".png'>"+(this.title);
                 list+="</span>";
-                list+="<span class='item-date'>"+(setDate.toLocaleString()).substr(2,9)+"</span>";
+                list+="<span class='item-date'>"+(this.date)+"</span>";
                 list+="</div>";
 
                 cnt++;

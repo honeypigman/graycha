@@ -186,6 +186,8 @@ class BlperController extends Controller
             $getArray = json_decode($datas['items'],1);
             if(count($getArray)>0){
                 foreach($getArray as $k=>$v){
+                    $v['date'] = substr((str_replace('-','.',$v['date'])),2);
+                    
                     $result['items'][$k] = $v;
                 }
                 $result['code']=0000;

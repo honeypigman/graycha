@@ -167,6 +167,19 @@ $(document).ready(function(){
                 $("b").css({'color':'#fa8ba0'});
                 }
             }
+
+            else if( rs.code == '9998' ){
+                alert('검색 제한 횟수 초과!');
+                var panelId = $("#tab-nav > li").first().remove().attr( "aria-controls" );
+                $( "#" + panelId ).remove();
+                tabs.tabs( "refresh" );
+
+                // $("#tabs").removeClass("active");
+                $("#wordArea").removeClass("active");      
+                $("#wordList").empty();
+                
+                return false;
+            }
             
             else{
                 var msg = "<div id='" + id + "' class='set-top text-muted'>- 검색결과 없음 -</div>";
@@ -283,7 +296,7 @@ $(document).ready(function(){
 
     function validKeyword(id){
         var result = null;
-        result = ($("#"+id).val()).replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-z0-9\s-,. ]/gi, '');
+        result = ($("#"+id).val()).replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-z0-9\u318D\u119E\u11A2\u2022\u2025a\u00B7\uFE55\s-,. ]/gi, '');
 
         $("#"+id).val(result);
         return result;

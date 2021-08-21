@@ -9,6 +9,7 @@ use Form;
 // Model
 use App\BlperRealtimeIssue;
 use App\BlperRealTimeKeyword;
+use App\BlperClientInfo;
 
 class BlperController extends Controller
 {
@@ -60,6 +61,7 @@ class BlperController extends Controller
 
     public function find(Request $request)
     {
+        
         // 기본값
         $setQuery = $addQuery = null;
         $_DATA = Func::requestToData($request);
@@ -73,9 +75,15 @@ class BlperController extends Controller
         //     $setQuery.=$_DATA['kw'.$i]."+";
         // }
         // $setQuery = substr($setQuery,0,-1);
-
+        
         $setQuery = preg_replace("/[^ㄱ-ㅎㅏ-ㅣ가-힣a-z0-9-,. ]/", "", trim($_DATA['kw0']));
-    
+            
+        // Report
+        if(!($this->getReportInfo($setQuery))){
+            $result['code']='9998';
+            return json_encode($result);
+        }
+
         if(!isset($setQuery)){
             abort(404);
         }else{
@@ -187,7 +195,7 @@ class BlperController extends Controller
             if(count($getArray)>0){
                 foreach($getArray as $k=>$v){
                     $v['date'] = substr((str_replace('-','.',$v['date'])),2);
-                    
+
                     $result['items'][$k] = $v;
                 }
                 $result['code']=0000;
@@ -216,6 +224,39 @@ class BlperController extends Controller
         }
 
         return json_encode($result);
+    }
+
+    private function getReportInfo($query){
+
+        $result = false;
+        $today = date('Ymd');
+
+        unset($_INFO);
+        $_INFO['date'] = date('Ymd H:i:s');
+        $_INFO['query'] = $query;
+        $_INFO['agent'] = $_SERVER['HTTP_USER_AGENT'];
+        $_INFO['ip'] = $_SERVER['REMOTE_ADDR'];
+
+        // DB
+        $cnt = BlperClientInfo::where('today', '=', $today)
+        ->where('ip', '=', $_INFO['ip'])
+        ->count();
+
+        // Save
+        if($cnt<env('BLPER_FIND_LIMIT')){
+            
+            $issue = new BlperClientInfo();
+            $issue->today = $today;
+            $issue->date = date('Ymd H:i:s');
+            $issue->ip = $_INFO['ip'];
+            $issue->query = $_INFO['query'];
+            $issue->agent = $_INFO['agent'];
+            $issue->save();
+
+            $result = true;
+        }
+
+        return $result;
     }
 
     // public function crawling(Request $request, $site)

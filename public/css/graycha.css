@@ -55,3 +55,6 @@ footer{
     height:145px;
   }
 }
+.card{
+  min-height: 100%;
+}

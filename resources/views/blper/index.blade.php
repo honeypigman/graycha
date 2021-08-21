@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="블퍼::블로그 포스팅 작성을 위한 도우미 서비스">
-    <meta name="keywords" content="포스팅 도우미, 실시간 이슈, 실시간 키워드, 연관 검색어">
+    <meta name="keywords" content="포스팅 서비스, 실시간 이슈, 실시간 키워드, 연관 검색어">
     <meta name="author" content="graycha">
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('BLPER') }} v{{ env('BLPER_VER') }}" />

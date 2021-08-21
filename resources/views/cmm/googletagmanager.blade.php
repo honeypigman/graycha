@@ -7,6 +7,3 @@
 
   gtag('config', 'G-H5FKLEBJT6');
 </script>
-
-<!-- Google adsbygoogle -->
-<!-- <script data-ad-client="ca-pub-7444190536386520" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->

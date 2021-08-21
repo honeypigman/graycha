@@ -4,13 +4,13 @@
     <title>{{ env('BLPER') }} v{{ env('BLPER_VER') }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="블퍼::블로그 포스팅 적성을 위한 도우미 서비스">
+    <meta name="description" content="블퍼::블로그 포스팅 작성을 위한 도우미 서비스">
     <meta name="keywords" content="포스팅 도우미, 실시간 이슈, 실시간 키워드, 연관 검색어">
     <meta name="author" content="graycha">
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('BLPER') }} v{{ env('BLPER_VER') }}" />
     <meta property="og:image" content="{{ env('BLPER_OR_IMG') }}">
-    <meta property="og:description" content="블퍼::블로그 포스팅 도우미 도우미">
+    <meta property="og:description" content="블퍼::블로그 포스팅 작성을 위한 도우미 서비스">
     <meta property="og:url" content="{{ env('BLPER_URL') }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -104,7 +104,7 @@
   </div>
   
   <div class="footer">
-    <div class="float-end">
+    <div class="float-start">
       Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.
     </div>
   </div>

@@ -62,7 +62,6 @@ $(document).ready(function(){
 
     // Relation Word Click - Add Tabs
     $(document).on("click", ".relation-word", function(e){
-        $('main').animate({scrollTop : 0}, 300);
 
         $("#kw0").val($(this).text());
 
@@ -90,15 +89,14 @@ $(document).ready(function(){
         var title = $(this).data('title');
 
         if(path == 'hotkey'){
-        $('main').animate({scrollTop : 0}, 300)
-        $("#kw0").val(title);
+            $("#kw0").val(title);
 
-        var word = validKeyword('kw0');
+            var word = validKeyword('kw0');
 
-        if(setInit()){
-            // Add Tab and Submit
-            var tabs_id = addTabs(word);
-            submit('GO', tabs, tabs_id);
+            if(setInit()){
+                // Add Tab and Submit
+                var tabs_id = addTabs(word);
+                submit('GO', tabs, tabs_id);
             }
         }else{
         window.open(link);
@@ -115,6 +113,9 @@ $(document).ready(function(){
     })
 
     var submit = function(action=null, tabs=null, id=null){
+
+        // Set Scroll Point 
+        $('main').animate({scrollTop : 0, scrollLeft : 0}, 300);
 
         // Background Staus
         $("#tabs").addClass("active");

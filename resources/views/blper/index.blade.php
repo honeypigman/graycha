@@ -55,14 +55,14 @@
   <div class="main-container">
     <div class="row line1">
       <!-- Seg1. Search List -->
-      <div class="col line1-seg-1">
+      <div class="col py-1 line1-seg-1">
         <div id="tabs" class="frame-form">
           <ul id="tab-nav"></ul>
         </div>
       </div>
         
       <!-- Seg2. Relation Keyword -->
-      <div class="col line1-seg-2">
+      <div class="col py-1 line1-seg-2">
         <div class='frame-form text-start' id="wordArea">
           <div id="wordTitle">
             연관 검색어   
@@ -78,7 +78,7 @@
     <!-- Line2 -->
     <div class="row line2">
       <!-- Seg1. RealTime Keyword -->
-      <div class="col line2-seg-1">
+      <div class="col py-1 line2-seg-1">
         <div class='frame-form' id="keywordArea">
           <div id="keywordTitle">실시간 키워드
             <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="최근 검색량이 높은 키워드 정보를 제공합니다.">
@@ -90,7 +90,7 @@
       </div>
 
       <!-- Seg1. RealTime Issue -->
-      <div class="col line2-seg-2">
+      <div class="col py-1 line2-seg-2">
         <div class='frame-form' id="issueArea">
           <div id="issueTitle">실시간 이슈
             <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="실시간 이슈 정보를 제공합니다.">
@@ -107,7 +107,7 @@
     <div class="float-start">
       Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.
     </div>
-    <div class="float-end">
+    <div class="float-end px-3">
       <span class="badge rounded-pill  bg-light text-dark" id="views">{{ $views ? $views : 0 }}</span>
     </div>
   </div>

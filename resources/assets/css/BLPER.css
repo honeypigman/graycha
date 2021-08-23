@@ -27,7 +27,7 @@ main{
     height: calc(100% - 111px);
     padding: 0 10px;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     /* padding-bottom: 60px; */
     /* min-height: 100%; */
     /* height:calc(100% - (171px)); */

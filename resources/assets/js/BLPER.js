@@ -154,17 +154,21 @@ $(document).ready(function(){
                 })
 
                 if(id){
+                    // Search List
+                    $("#"+id).remove();
+                    tabs.append( "<div id='" + id + "' class='tab-form'>"+list+"</div>");
+                    tabs.tabs( "refresh" );
 
-                // Search List
-                $("#"+id).remove();
-                tabs.append( "<div id='" + id + "' class='tab-form'>"+list+"</div>");
-                tabs.tabs( "refresh" );
-
-                // Word List
-                if(action=='GO'){
-                    $("#wordList").empty().append(words);
+                    // Word List
+                    if(action=='GO'){
+                        $("#wordList").empty().append(words);
+                    }
+                    $("b").css({'color':'#fa8ba0'});
                 }
-                $("b").css({'color':'#fa8ba0'});
+
+                // Views
+                if(rs.views>0){
+                    $("#views").empty().text(rs.views);
                 }
             }
 

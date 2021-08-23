@@ -107,6 +107,9 @@
     <div class="float-start">
       Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.
     </div>
+    <div class="float-end">
+      <span class="badge rounded-pill  bg-light text-dark" id="views">{{ $views ? $views : 0 }}</span>
+    </div>
   </div>
 </main>
 

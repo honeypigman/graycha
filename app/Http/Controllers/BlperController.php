@@ -26,8 +26,10 @@ class BlperController extends Controller
 
     public function index(Request $request)
     {        
+        $views = $this->getViews();
+
         // 실시간 검색 TOP 보여주기
-        return view('blper/index');
+        return view('blper/index')->with('views', $views);
     }
 
     public function curl($url, $target=null){
@@ -83,6 +85,7 @@ class BlperController extends Controller
             $result['code']='9998';
             return json_encode($result);
         }
+        
 
         if(!isset($setQuery)){
             abort(404);
@@ -147,6 +150,9 @@ class BlperController extends Controller
                     
                     // 코드
                     $result['code']=($cnt>0?'0000':'9999');
+
+                    // 조회수
+                    $result['views'] = $this->getViews();
                 }
             }
 
@@ -257,6 +263,14 @@ class BlperController extends Controller
         }
 
         return $result;
+    }
+
+    private function getViews(){
+        $today = date('Ymd');
+        $views = BlperClientInfo::where('today', '=', $today)
+        ->count();
+
+        return $views;
     }
 
     // public function crawling(Request $request, $site)

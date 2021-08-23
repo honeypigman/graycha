@@ -34,7 +34,6 @@ main{
     /* height:calc(100% - (171px)); */
 }
 .footer{
-    min-width: 450px;
     position: relative;
     padding: 10px 10px;
     width: 100%;
@@ -42,7 +41,8 @@ main{
     bottom: 0;
     left: 0;
     background-color:#fff;
-    font-size: .7971rem;
+    font-size: .6971rem;
+    /* min-width: 450px; */
     /* border-top: 1px solid #c7c7c7; */
     /* transform: translateY(-100%); */
     /* overflow: hidden; */

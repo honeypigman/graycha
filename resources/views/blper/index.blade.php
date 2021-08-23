@@ -104,12 +104,8 @@
   </div>
   
   <div class="footer">
-    <div class="float-start">
-      Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.
-    </div>
-    <div class="float-end px-3">
-      <span class="badge rounded-pill  bg-light text-dark" id="views">{{ $views ? $views : 0 }}</span>
-    </div>
+    <span class="float-start">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</span>
+    <span class="badge rounded-pill  bg-light text-dark float-end" id="views">{{ $views ? $views : 0 }}</span>
   </div>
 </main>
 

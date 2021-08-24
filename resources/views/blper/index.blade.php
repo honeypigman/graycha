@@ -105,7 +105,7 @@
   
   <div class="footer">
     <p>
-      <span class="float-start text-muted">* 본 서비스는 네이버, 다음, 구글에서 제공하는 서비스를 이용하여 제공되는 정보입니다.</span>
+      <span class="float-start text-muted">* 본 서비스는 네이버, 다음, 구글의 연동 서비스를 이용하여 제공되는 정보입니다.</span>
     </p>
     <p>
       <span class="float-start text-muted">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</span>

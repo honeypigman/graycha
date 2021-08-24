@@ -105,15 +105,30 @@
   
   <div class="footer">
     <span class="float-start">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</span>
-    <span class="badge rounded-pill  bg-light text-dark float-end" id="views">{{ $views ? $views : 0 }}</span>
+    <span class="badge rounded-pill  bg-light text-dark float-end" id="views" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewsHisModal">{{ $views ? $views : 0 }}</span>
   </div>
 </main>
+
+<!-- Modal -->
+<div class="modal fade" id="viewsHisModal" tabindex="-1" aria-labelledby="viewsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="viewsModalLabel"> 검색이력 - {{ date('Y-m-d') }} </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="viewsModalBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- script -->
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.ui.min.js"></script>
 <script src="{{ mix('/js/blper.js') }}"></script>
-
 </body>
 </html>

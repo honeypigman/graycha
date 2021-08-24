@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
     // ToolTip
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -53,6 +53,51 @@ $(document).ready(function(){
         // $("form")[0].reset();
     });
 
+    // Views
+    $("#views").on('click', function(){
+        // His Body
+        $("#viewsModalBody").empty();
+
+        $.ajax({
+            method:"POST",
+            url:"/blper/views",
+            dataType : 'JSON',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success : function(rs){
+            var list = '';
+            $.each(rs, function(){
+                
+                var color = '';
+                var random = Math.random() * 4;
+                var num = Math.floor(random) + 1;
+
+                switch(num){
+                case 1 :
+                    color = 'primary';
+                    break;
+                case 2 :
+                    color = 'secondary';
+                    break;
+                case 3 :
+                    color = 'success';
+                    break;
+                case 4 :
+                    color = 'dark';
+                    break;
+                default :
+                    color = 'primary';
+                }
+                list+="<button type='button' class='btn btn-outline-"+color+" m-1'>"+(this.query)+"</button>";
+            })
+            $("#viewsModalBody").empty().append(list);
+            },
+            error : function(error){
+            console.log('Error>'+error);
+            }
+        });    
+    });
 
     // Section Copy
     $(document).on("click",".se-module-text",function(e){
@@ -214,7 +259,7 @@ $(document).ready(function(){
         $("#issueList").empty().html(spinner());
 
         $.ajax({
-            method:"GET",
+            method:"POST",
             url:"/blper/issue",
             dataType : 'JSON',
             headers: {
@@ -260,7 +305,7 @@ $(document).ready(function(){
 
 
         $.ajax({
-            method:"GET",
+            method:"POST",
             url:"/blper/keyword",
             dataType : 'JSON',
             headers: {

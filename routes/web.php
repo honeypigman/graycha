@@ -34,6 +34,7 @@ Route::post('/kids/dtd/sample', 'KidsController@dtdSampleList');
 // Blog
 Route::get('/blper', 'BlperController@index');
 Route::post('/blper/find', 'BlperController@find');
-Route::get('/blper/issue', 'BlperController@issue');
-Route::get('/blper/keyword', 'BlperController@keyword');
+Route::post('/blper/issue', 'BlperController@issue');
+Route::post('/blper/keyword', 'BlperController@keyword');
+Route::post('/blper/views', 'BlperController@views');
 // Route::post('/blper/crawling/{site}', 'BlperController@crawling');

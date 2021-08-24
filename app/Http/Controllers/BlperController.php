@@ -273,6 +273,15 @@ class BlperController extends Controller
         return $views;
     }
 
+    public function views(){
+        $today = date('Ymd');
+        $list = BlperClientInfo::select('date', 'query')
+        ->where('today', '=', $today)
+        ->get();
+
+        return json_encode($list);
+    }
+
     // public function crawling(Request $request, $site)
     // {
     //     if(!isset($_POST['link'])){

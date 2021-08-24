@@ -104,8 +104,8 @@
   </div>
   
   <div class="footer">
-    <p>
-      <span class="float-start text-muted">* 본 서비스는 네이버, 다음, 구글, 대한민국 정책브리핑 연동 서비스를 이용하여 제공되는 정보입니다.</span>
+    <p style="margin-right:18px">
+      <span class="float-start text-muted">* 본 서비스는 {{ env('BLPER_DATA_ROOT') }} 연동서비스를 이용한 데이터 기반의 정보를 제공하고 있습니다.</span>
     </p>
     <p>
       <span class="float-start text-muted pt-1">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</span>

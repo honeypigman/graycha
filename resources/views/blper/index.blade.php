@@ -104,8 +104,13 @@
   </div>
   
   <div class="footer">
-    <span class="float-start">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</span>
-    <span class="badge rounded-pill  bg-light text-dark float-end" id="views" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewsHisModal">{{ $views ? $views : 0 }}</span>
+    <p>
+      <span class="float-start text-muted">* 본 서비스는 네이버, 다음, 구글에서 제공하는 서비스를 이용하여 제공되는 정보입니다.</span>
+    </p>
+    <p>
+      <span class="float-start text-muted">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</span>
+      <span class="badge rounded-pill  bg-light text-dark float-end" id="views" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewsHisModal">{{ $views ? $views : 0 }}</span>
+    </p>
   </div>
 </main>
 

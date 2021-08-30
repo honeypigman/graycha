@@ -22,11 +22,11 @@ $(function () {
         this.select();
     });
 
-    $(".keywordInput").on("keyup", function (key) {
+    $(".keywordInput").on("keypress", function (key) {
 
         var word = validKeyword('kw0');
 
-        if (key.keyCode == 13) {
+        if (key.keyCode === 13) {
             if (setInit()) {
                 // Add Tab and Submit
                 var tabs_id = addTabs(word);

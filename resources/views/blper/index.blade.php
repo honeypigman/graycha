@@ -30,7 +30,7 @@
     </div>
   </div>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <form id="form" method="POST" onsubmit="return false">
+  <form id="form" method="POST" onsubmit="return false;">
     <div class="header-container">
       <div class="row">
         <div class="col-8">

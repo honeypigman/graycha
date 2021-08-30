@@ -111,15 +111,17 @@ class BlperController extends Controller
                         $getArray = json_decode($returnValue,1);
 
                         $cnt=0;
-                        foreach($getArray['documents'] as $datas){
-                            $postdate = substr($datas['datetime'],2,2).substr($datas['datetime'],5,2).substr($datas['datetime'],8,2);
-                            $result['items'][$site.'_'.$cnt]['site'] = $site;
-                            $result['items'][$site.'_'.$cnt]['title'] = $datas['title'];
-                            $result['items'][$site.'_'.$cnt]['content'] = $datas['contents'];
-                            $result['items'][$site.'_'.$cnt]['date'] = substr($datas['datetime'],2,2).".".substr($datas['datetime'],5,2).".".substr($datas['datetime'],8,2);
-                            $result['items'][$site.'_'.$cnt]['link'] = $datas['url'];
-                            
-                            $cnt++;
+                        if(isset($getArray['documents'])){
+                            foreach($getArray['documents'] as $datas){
+                                $postdate = substr($datas['datetime'],2,2).substr($datas['datetime'],5,2).substr($datas['datetime'],8,2);
+                                $result['items'][$site.'_'.$cnt]['site'] = $site;
+                                $result['items'][$site.'_'.$cnt]['title'] = $datas['title'];
+                                $result['items'][$site.'_'.$cnt]['content'] = $datas['contents'];
+                                $result['items'][$site.'_'.$cnt]['date'] = substr($datas['datetime'],2,2).".".substr($datas['datetime'],5,2).".".substr($datas['datetime'],8,2);
+                                $result['items'][$site.'_'.$cnt]['link'] = $datas['url'];
+                                
+                                $cnt++;
+                            }
                         }
                     }
                     
@@ -134,17 +136,18 @@ class BlperController extends Controller
                         $url = "https://openapi.naver.com/v1/search/".$_DATA['contentType'].".json?query=".$encText;
                         $returnValue = $this->curl($url, $site);
                         $getArray = json_decode($returnValue,1);
-                        
                         $cnt=0;
-                        foreach($getArray['items'] as $datas){
-                            $postdate = substr($datas['postdate'],2,2).substr($datas['postdate'],4,2).substr($datas['postdate'],6,2);
-                            $result['items'][$site.'_'.$cnt]['site'] = $site;
-                            $result['items'][$site.'_'.$cnt]['title'] = $datas['title'];
-                            $result['items'][$site.'_'.$cnt]['content'] = $datas['description'];
-                            $result['items'][$site.'_'.$cnt]['date'] = substr($datas['postdate'],2,2).".".substr($datas['postdate'],4,2).".".substr($datas['postdate'],6,2);
-                            $result['items'][$site.'_'.$cnt]['link'] = $datas['link'];
-                            
-                            $cnt++;
+                        if(isset($getArray['items'])){
+                            foreach($getArray['items'] as $datas){
+                                $postdate = substr($datas['postdate'],2,2).substr($datas['postdate'],4,2).substr($datas['postdate'],6,2);
+                                $result['items'][$site.'_'.$cnt]['site'] = $site;
+                                $result['items'][$site.'_'.$cnt]['title'] = $datas['title'];
+                                $result['items'][$site.'_'.$cnt]['content'] = $datas['description'];
+                                $result['items'][$site.'_'.$cnt]['date'] = substr($datas['postdate'],2,2).".".substr($datas['postdate'],4,2).".".substr($datas['postdate'],6,2);
+                                $result['items'][$site.'_'.$cnt]['link'] = $datas['link'];
+                                
+                                $cnt++;
+                            }
                         }
                     }
                     
@@ -155,32 +158,32 @@ class BlperController extends Controller
                     $result['views'] = $this->getViews();
                 }
             }
-
-            // 연관검색
-            unset($url, $returnValue);
-            $url = "https://suggestqueries.google.com/complete/search?output=toolbar&q=".urlencode($setQuery);
-            $returnValue = $this->curl($url);
-
-            
-            // Xml TO Json
-            $getXml = simplexml_load_string($returnValue, "SimpleXMLElement", LIBXML_NOCDATA);
-            $setJson = json_encode($getXml->CompleteSuggestion, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
-            $getArray = json_decode($setJson,1);
-
-            if(count($getArray)>1){
-                $j=0;
-                foreach($getArray as $datas){
-                    
-                    if($setQuery == trim($datas['suggestion']['@attributes']['data'])){
-                        continue;
-                    }
-
-                    $result['words'][$j]['text'] = $datas['suggestion']['@attributes']['data'];
-                    $j++;
-                }
-            }
-            
+                
             if(isset($result['items'])){
+                // 연관검색
+                unset($url, $returnValue);
+                $url = "https://suggestqueries.google.com/complete/search?output=toolbar&q=".urlencode($setQuery);
+                $returnValue = $this->curl($url);
+
+                // echo ($returnValue);
+                
+                // Xml TO Json
+                $getXml = simplexml_load_string($returnValue, "SimpleXMLElement", LIBXML_NOCDATA);
+                $setJson = json_encode($getXml->CompleteSuggestion, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                $getArray = json_decode($setJson,1);
+    
+                if(count($getArray)>1){
+                    $j=0;
+                    foreach($getArray as $datas){
+                        
+                        if($setQuery == trim($datas['suggestion']['@attributes']['data'])){
+                            continue;
+                        }
+    
+                        $result['words'][$j]['text'] = $datas['suggestion']['@attributes']['data'];
+                        $j++;
+                    }
+                }
                 asort($result['items']);
             }
 
@@ -268,15 +271,19 @@ class BlperController extends Controller
     private function getViews(){
         $today = date('Ymd');
         $views = BlperClientInfo::where('today', '=', $today)
+        ->where('query', '!=', '')
+        ->whereNotNull('query')
         ->count();
-
+        
         return $views;
     }
-
+    
     public function views(){
         $today = date('Ymd');
         $list = BlperClientInfo::select('date', 'query')
         ->where('today', '=', $today)
+        ->where('query', '!=', '')
+        ->whereNotNull('query')
         ->get();
 
         return json_encode($list);

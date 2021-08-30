@@ -199,9 +199,6 @@ $(function () {
                     })
 
                     if (id) {
-
-                        console.log('Tabs ID[' + rs.code + '] = ' + id);
-
                         // Search List
                         $("#" + id).remove();
                         tabs.append("<div id='" + id + "' class='tab-form'>" + list + "</div>");

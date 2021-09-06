@@ -210,7 +210,7 @@
         <table class="table table-striped text-center">
           <thead>
             <tr>
-              <th scope="col">검색어</th>
+              <th scope="col">검색어</th> 
               <th scope="col">PC/MO<br/>검색량</th>
               <th scope="col">블로그<br/>문서수</th>
               <th scope="col">카페<br/>문서수</th>

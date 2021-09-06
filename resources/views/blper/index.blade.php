@@ -112,13 +112,11 @@
         <div class='report-form text-start' id="reportArea">
           <div id="reportResultTitle">
             결과
-            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-html="true" title="Blper 데이터를 통해 산출된 키워드 등급을 제공합니다.(* 구간: 1등급 ~ 5등급 )">
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-html="true" title="Blper 데이터를 통해 산출된 키워드 등급을 제공합니다.(* 구간: 1등급 ~ 10등급 )">
               <i class="far fa-question-circle"></i>
             </span>
           </div>
-          <div class="report-result result-color-none">
-            -
-          </div>
+          <div class="report-result"><span id="keyWordGrade">-</span></div>
         </div>
       </div>
     </div>
@@ -216,8 +214,7 @@
               <th scope="col">PC/MO<br/>검색량</th>
               <th scope="col">블로그<br/>문서수</th>
               <th scope="col">카페<br/>문서수</th>
-              <th scope="col">웹문서<br/>문서수</th>
-              <th scope="col">가중치(%)</th>
+              <th scope="col">등급</th>
             </tr>
           </thead>
           <tbody></tbody>

@@ -205,7 +205,7 @@ body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); bord
     width: 75px;
     text-align: right;
     font-size: .6971rem;
-    color: blue;
+    color: #0065ff96;
     padding-right: 8px;
 }
 .cnt-mo{
@@ -213,7 +213,7 @@ body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); bord
     width: 75px;
     text-align: right;
     font-size: .6971rem;
-    color: green;
+    color: #00800082;
 }
 .item-skip{
     width: 300px;

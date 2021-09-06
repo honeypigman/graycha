@@ -85,6 +85,8 @@ class BlperController extends Controller
                 $result['word']['naver'] = $this->AdApiNaver($query);
                 // asort($result['items']);
             }
+            
+            $result['grade'] = $this->getGrade($result['word']['naver']['report'], $result['items']['daum']['report'], $result['items']['naver']['report']);
 
             return json_encode($result);
         }
@@ -340,5 +342,55 @@ class BlperController extends Controller
         }
 
         return $result;
+    }
+
+    protected function getGrade( $arrWord=Array(), $arrNaver=Array(), $arrDaum=Array() ){
+        
+        $monTotalCnt = 0;
+        $monNaverCnt = 0;
+        $monDaumCnt = 0;
+        
+        if(isset($arrWord)){
+            $monTotalCnt = (int)(str_replace(',','',$arrWord['monTotalCntPc']))+(int)(str_replace(',','',$arrWord['monTotalCntMo']));
+            if(!$monTotalCnt) $monTotalCnt=1;
+        }
+        if(isset($arrNaver)){
+            foreach($arrNaver as $data){
+                if($data['type']=='b'){
+                    $monNaverCnt+=(int)(str_replace(',','',$data['total']));
+                }
+            }
+        }
+        if(isset($arrDaum)){
+            foreach($arrDaum as $data){
+                if($data['type']=='b'){
+                    $monDaumCnt+=(int)(str_replace(',','',$data['total']));
+                }
+            }
+        }
+
+        // 비율 : 전체문서수 / (총 조회수)
+        $rate = round(($monNaverCnt+$monDaumCnt/2)/$monTotalCnt,2);
+        
+
+        $arrGradeMatrix = Array(
+            1 => array(0, 0.05),
+            2 => array(0.06, 0.59),
+            3 => array(0.60, 0.99),
+            4 => array(1.00, 2.99),
+            5 => array(3.00, 4.99),
+            6 => array(5, 9.99),
+            7 => array(10.00, 29.99),
+            8 => array(30, 49.99),
+            9 => array(50.00, 99.99),
+            10 => array(100, 99999999),
+        );
+
+        foreach($arrGradeMatrix as $grade=>$area){
+            if( $rate>=$area[0] && $rate<=$area[1] ){
+                return $grade;
+                break;
+            }
+        }
     }
 }

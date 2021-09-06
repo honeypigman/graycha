@@ -241,6 +241,21 @@ $(function () {
                         }
                         $("b").css({ 'color': '#fa8ba0' });
 
+                        // Keyword Grade
+                        $("#keyWordGrade").empty().text(rs.grade);
+                        var gradeColor = 'text-white';
+                        if (rs.grade > 0 && rs.grade < 3) {
+                            gradeColor = 'text-success';
+                        } else if (rs.grade > 2 && rs.grade < 5) {
+                            gradeColor = 'text-pramary';
+                        } else if (rs.grade > 4 && rs.grade < 8) {
+                            gradeColor = 'text-warning';
+                        } else if (rs.grade > 7) {
+                            gradeColor = 'text-danger';
+                        }
+                        $("#keyWordGrade").removeClass();
+                        $("#keyWordGrade").addClass(gradeColor);
+
                         // Monthly Report
                         $("#monthlyReport").removeClass('d-none');
 
@@ -444,16 +459,18 @@ $(function () {
     }
 
     function monthlyReportHisAdd(word) {
+        var grade = $("#keyWordGrade").text();
+
         var monTotalCntPc = $("#monTotalCntPc").text();
         var monTotalCntMo = $("#monTotalCntMo").text();
 
         var monCnt_naver_b = $("#monCnt_naver_b").text();
         var monCnt_naver_c = $("#monCnt_naver_c").text();
-        var monCnt_naver_w = $("#monCnt_naver_w").text();
+        // var monCnt_naver_w = $("#monCnt_naver_w").text();
 
         var monCnt_daum_b = $("#monCnt_daum_b").text();
         var monCnt_daum_c = $("#monCnt_daum_c").text();
-        var monCnt_daum_w = $("#monCnt_daum_w").text();
+        // var monCnt_daum_w = $("#monCnt_daum_w").text();
 
         var tr = "";
         tr += "<tr>"
@@ -462,12 +479,12 @@ $(function () {
 
         tr += "<td>" + monCnt_naver_b + " <br/>" + monCnt_daum_b + "</td>";
         tr += "<td>" + monCnt_naver_c + " <br/>" + monCnt_daum_c + "</td>";
-        tr += "<td>" + monCnt_naver_w + " <br/>" + monCnt_daum_w + "</td>";
+        // tr += "<td>" + monCnt_naver_w + " <br/>" + monCnt_daum_w + "</td>";
 
-        tr += "<td>-</td>";
+        tr += "<td>" + grade + "</td>";
         tr += "</tr>"
 
-        $("#viewsMonthlyHisModalBody tbody").append(tr);
+        $("#viewsMonthlyHisModalBody tbody").prepend(tr);
 
     }
 })

@@ -18,6 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ mix('/css/fontawesome.css') }}" rel="stylesheet">
     <link href="/css/graycha.css" rel="stylesheet">
     @if(env('APP_ENV') == 'P')
       @include('cmm.googletagmanager')
@@ -44,7 +45,7 @@
     @yield('content')
   </main>
 
-  <footer class="text-muted py-3">
+  <footer class="text-muted p-1">
     @include('int.footer')
   </footer>
   <script src="/js/bootstrap.min.js"></script>        

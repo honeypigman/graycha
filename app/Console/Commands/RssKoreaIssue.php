@@ -4,9 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Log;
-
-// Controller
-use App\Http\Controllers\BlperController;
+use RestApi;
 
 // Model
 use App\BlperRealtimeIssue;
@@ -46,23 +44,21 @@ class RssKoreaIssue extends Command
     {
         Log::info('SCH RssKoreaIssue    Start'.date('Ymd H:i:s'));
 
-        $today=date('Y-m-d');
-        $site = "kor";
-        $url = env('RSS_KOREA_ISSUE');
-        $blper = app(BlperController::class);
-        $returnValue = $blper->curl($url);
-        
-        // Xml TO Array
-        $getXml = simplexml_load_string($returnValue, "SimpleXMLElement", LIBXML_NOCDATA);
-        $setJson = json_encode($getXml);
-        $getArray = json_decode($setJson,1);
+        $setQuery = Array();
+        $result = Array();
 
-        foreach($getArray['channel']['item'] as $k=>$data){
+        $site = "kor";
+        $today=date('Y-m-d');
+        $_API['url'] = env('RSS_KOREA_ISSUE');
+        
+        $api = new RestApi('KOREA_ISSUE', $_API);
+        $res = $api->GET('policy.xml', $setQuery, 'XML');
+
+        foreach($res['channel']['item'] as $k=>$data){
             $result[$k]['site'] = $site;
             $result[$k]['title'] = $data['title'];
             $result[$k]['link'] = $data['link'];
             $result[$k]['date'] = date('Y-m-d', strtotime($data['pubDate']));
-            // $result[$k]['content'] = $data['description'];
         }
 
         // DB
@@ -94,7 +90,7 @@ class RssKoreaIssue extends Command
             $issue->save();
         }
         
-        Log::info('SCH RssKoreaIssue    CNT : '.count($getArray['channel']['item']));
+        Log::info('SCH RssKoreaIssue    CNT : '.count($res['channel']['item']));
         Log::info('SCH RssKoreaIssue    END'.date('Ymd H:i:s'));
         return 0;
     }

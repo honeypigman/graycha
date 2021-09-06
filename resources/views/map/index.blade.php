@@ -15,6 +15,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="/js/jquery.min.js"></script>
     <link href="{{ mix('/css/common.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/map.css') }}" rel="stylesheet">
     @if(env('APP_ENV') == 'P')
       @include('cmm.googletagmanager')
@@ -41,7 +42,7 @@
 
   <div class="serach-bar">
     <div class="alert alert-danger d-none" id="search-alert" role="alert">
-      <img src="/img/icon/alert-triangle.svg"/> <span id="search-alert-msg"></span>
+      <i class="fas fa-exclamation-triangle"></i> <span id="search-alert-msg"></span>
     </div>
     <div class="addr-bar">
       <input type="text" class="form-control" id="address" placeholder='주소를 입력해주세요.(읍/면/동)'>

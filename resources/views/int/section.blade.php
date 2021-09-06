@@ -1,4 +1,4 @@
-<section class="py-5 text-center container">
+<section class="container text-center py-5">
     <div class="row">
       <div class="col-lg-7 col-md-8 mx-auto">
         <h1 class="fw-bold">Hello World</h1>

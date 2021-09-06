@@ -56,7 +56,7 @@ $(function () {
     // Views
     $("#views").on('click', function () {
         // His Body
-        $("#viewsModalBody").empty();
+        $("#viewsSearchHisModalBody").empty();
 
         $.ajax({
             method: "POST",
@@ -91,7 +91,7 @@ $(function () {
                     }
                     list += "<button type='button' class='btn btn-outline-" + color + " m-1'>" + (this.query) + "</button>";
                 })
-                $("#viewsModalBody").empty().append(list);
+                $("#viewsSearchHisModalBody").empty().append(list);
             },
             error: function (error) {
                 console.log('Error>' + error);
@@ -108,7 +108,9 @@ $(function () {
     // Relation Word Click - Add Tabs
     $(document).on("click", ".relation-word", function (e) {
 
-        $("#kw0").val($(this).text());
+        var getText = $(this).find('.relation-word-area').text();
+
+        $("#kw0").val(getText);
 
         var word = validKeyword('kw0');
 
@@ -119,7 +121,7 @@ $(function () {
     });
 
     // Close icon: removing the tab on click
-    tabs.on("click", "svg.feather-x", function () {
+    tabs.on("click", "i.fa-trash", function () {
         var panelId = $(this).closest("li").remove().attr("aria-controls");
         $("#" + panelId).remove();
         tabs.tabs("refresh");
@@ -159,6 +161,9 @@ $(function () {
 
     var submit = function (action = null, tabs = null, id = null) {
 
+        // MonthlyReport Reset
+        setInitMonthlyInfo();
+
         // Set Scroll Point 
         $('main').animate({ scrollTop: 0, scrollLeft: 0 }, 300);
 
@@ -166,6 +171,8 @@ $(function () {
         $("#tabs").addClass("active");
         $("#wordArea").addClass("active");
 
+        // Keyword
+        var keyword = $("#kw0").val();
         var formData = $("#form").serialize();
 
         $.ajax({
@@ -179,23 +186,47 @@ $(function () {
             success: function (rs) {
 
                 if (rs.code == '0000') {
+
+                    // 검색결과
                     var cnt = 1;
                     var list = '';
-                    $.each(rs['items'], function () {
-                        list += "<div class='item-list' data-site='" + (this.site) + "' data-title=\"" + this.title + "\" data-link='" + this.link + "' style='cursor:pointer'>";
-                        list += "<span class='item-skip' title='" + (this.title) + "'>";
-                        list += "<img class='list_log'src='/img/icon/logo-" + (this.site) + ".png'>" + this.title;
-                        list += "</span>";
-                        list += "<span class='item-date'>" + (this.date) + "</span>";
-                        list += "</div>";
+                    $.each(rs['items'], function (site) {
+                        $.each(rs['items'][site], function (contents) {
+                            $.each(rs['items'][site][contents], function () {
+                                if (contents == 'report') {
+                                    $("#monCnt_" + site + "_" + (this.type)).empty().text((this.total));
+                                } else {
+                                    list += "<div class='item-list' data-site='" + (site) + "' data-title=\"" + this.title + "\" data-link='" + this.link + "' style='cursor:pointer'>";
+                                    list += "<span class='item-skip' title='" + (this.title) + "'>";
+                                    list += "<img class='list_log'src='/img/icon/logo-" + (site) + ".png'><i class='fas fa-file-alt " + (contents) + "-color'></i> " + this.title;
+                                    list += "</span>";
+                                    if (this.date)
+                                        list += "<span class='item-date'>" + (this.date) + "</span>";
+                                    list += "</div>";
+                                }
+                            });
+                        });
                     });
 
                     // 연관 검색어
                     var cnt = 1;
                     var words = "";
-                    $.each(rs['words'], function () {
-                        words += "<div class='relation-word word-list'><span class='text-word'>" + this.text + "</span></div>";
-                        cnt++;
+
+                    $.each(rs.word, function (target) {
+                        $.each(rs.word[target], function (contents) {
+                            if (contents == 'report') {
+                                $("#monTotalCntPc").empty().text(this.monTotalCntPc);
+                                $("#monTotalCntMo").empty().text(this.monTotalCntMo);
+                            } else {
+                                words += "<div class='relation-word word-list'><span class='relation-word-area text-word'>";
+                                words += "<img class='list_log'src='/img/icon/logo-" + (target) + ".png'>" + this.text;
+                                words += "</span>";
+                                if (target == 'naver') {
+                                    words += "<span class='item-cnt'><div class='cnt-pc'><i class='fas fa-desktop fa-sm float-start'></i>" + (this.pcCnt) + "</div><div class='cnt-mo'><i class='fas fa-mobile-alt fa-sm float-start'></i>" + (this.moCnt) + "</div></span>";
+                                }
+                                words += "</div>";
+                            }
+                        })
                     })
 
                     if (id) {
@@ -209,6 +240,12 @@ $(function () {
                             $("#wordList").empty().append(words);
                         }
                         $("b").css({ 'color': '#fa8ba0' });
+
+                        // Monthly Report
+                        $("#monthlyReport").removeClass('d-none');
+
+                        // Monthly His ADD
+                        monthlyReportHisAdd(keyword);
                     }
 
                     // Views
@@ -229,9 +266,6 @@ $(function () {
                 }
 
                 else {
-
-                    console.log('Tabs ID[' + rs.code + '] = ' + id);
-
                     var msg = "<div id='" + id + "' class='set-top text-muted'>- 검색결과 없음 -</div>";
 
                     // Search List
@@ -325,8 +359,7 @@ $(function () {
                         list += "<span class='item-skip' title='" + (this.title) + "'>";
                         list += "<img class='list_log'src='/img/icon/logo-" + (this.site) + ".png'>" + (this.title);
                         list += "</span>";
-                        list += "<span class='item-link float-end px-1' data-link='" + this.link + "'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-external-link'><path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'></path><polyline points='15 3 21 3 21 9'></polyline><line x1='10' y1='14' x2='21' y2='3'></line></svg></span>";
-                        // list+="<span class='item-date'>"+(setDate.toLocaleString()).substr(2,9)+"</span>";
+                        list += "<span class='item-link float-end px-1' data-link='" + this.link + "'><i class='fas fa-external-link-alt'></i></span>";
                         list += "</div>";
 
                         cnt++;
@@ -382,7 +415,7 @@ $(function () {
         // }
 
         var id = "tab-content-" + tabCounter;
-        var tabTemplate = "<li><a href='#{href}'># #{word}</a> <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x' style='margin:5px 5px 0 -8px;'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></li>";
+        var tabTemplate = "<li><a href='#{href}'># #{word}</a><i class='fas fa-trash fa-sm' style='margin:7px 5px 0 -5px; cursor:pointer;'></i></li>";
         var li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{word\}/g, word));
 
         tabs.find(".ui-tabs-nav").prepend(li);
@@ -395,5 +428,47 @@ $(function () {
         tabCounter++;
 
         return id;
+    }
+
+    function setInitMonthlyInfo() {
+        $("#monTotalCntPc").empty().text(0);
+        $("#monTotalCntMo").empty().text(0);
+
+        $("#monCnt_naver_b").empty().text(0);
+        $("#monCnt_naver_c").empty().text(0);
+        $("#monCnt_naver_w").empty().text(0);
+
+        $("#monCnt_daum_b").empty().text(0);
+        $("#monCnt_daum_c").empty().text(0);
+        $("#monCnt_daum_w").empty().text(0);
+    }
+
+    function monthlyReportHisAdd(word) {
+        var monTotalCntPc = $("#monTotalCntPc").text();
+        var monTotalCntMo = $("#monTotalCntMo").text();
+
+        var monCnt_naver_b = $("#monCnt_naver_b").text();
+        var monCnt_naver_c = $("#monCnt_naver_c").text();
+        var monCnt_naver_w = $("#monCnt_naver_w").text();
+
+        var monCnt_daum_b = $("#monCnt_daum_b").text();
+        var monCnt_daum_c = $("#monCnt_daum_c").text();
+        var monCnt_daum_w = $("#monCnt_daum_w").text();
+
+        var tr = "";
+        tr += "<tr>"
+        tr += "<th scope='row'>" + word + "</th>";
+        tr += "<td>" + monTotalCntPc + "</td>";
+        tr += "<td>" + monTotalCntMo + "</td>";
+
+        tr += "<td>" + monCnt_naver_b + " <br/>" + monCnt_daum_b + "</td>";
+        tr += "<td>" + monCnt_naver_c + " <br/>" + monCnt_daum_c + "</td>";
+        tr += "<td>" + monCnt_naver_w + " <br/>" + monCnt_daum_w + "</td>";
+
+        tr += "<td>-</td>";
+        tr += "</tr>"
+
+        $("#viewsMonthlyHisModalBody tbody").append(tr);
+
     }
 })

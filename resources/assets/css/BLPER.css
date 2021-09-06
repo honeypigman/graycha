@@ -49,6 +49,12 @@ main{
     /* opacity: 0; */
     /* transition-duration: .3s; */
 }
+.table {
+    vertical-align: middle;
+}
+.table>thead {
+    vertical-align: middle;
+}
 
 /* Scroll */
 body::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -56,6 +62,15 @@ body::-webkit-scrollbar-thumb { background-color: rgba(200, 200, 200, 0.6); bord
 body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); border-radius: 10px; }
 
 /* Frame Segment */
+.line0 {
+    /* min-width: 840px; */
+}
+.line0-seg-1{
+    min-width: 200px;
+}
+.line0-seg-2{
+    min-width: 400px;
+}
 .line1 {
     /* min-width: 840px; */
 }
@@ -138,6 +153,25 @@ body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); bord
     box-sizing: border-box;
     display: block; */
 }
+.report-form{
+    border:0px; 
+    background-color:transparent; 
+    padding:0;
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    min-width: 0; 
+    word-wrap: break-word; 
+    background-color: #fff; 
+    background-clip: border-box; 
+    border: 1px solid rgba(0,0,0,.125); 
+    border-radius: .5rem; 
+    height: 155px; 
+    overflow-y: auto;
+    overflow-x: none;
+    flex: 1 1 auto;
+    /* background-color: rgb(0 0 0 / 5%);*/
+}
 .tab-form{
     width: 100%;
     overflow-y: auto;
@@ -160,7 +194,26 @@ body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); bord
 }
 .item-date{
     float:right;
-    font-size: 0.7971rem;
+    font-size: 0.6971rem;
+}
+.item-cnt{
+    float:right;
+    text-align: left;
+}
+.cnt-pc{
+    display: inline-block;
+    width: 75px;
+    text-align: right;
+    font-size: .6971rem;
+    color: blue;
+    padding-right: 8px;
+}
+.cnt-mo{
+    display: inline-block;
+    width: 75px;
+    text-align: right;
+    font-size: .6971rem;
+    color: green;
 }
 .item-skip{
     width: 300px;
@@ -174,6 +227,46 @@ body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); bord
 .text-word{
     display: inline-block;
     overflow: hidden;
+}
+.report-cnt-form {
+    display: flex;
+    text-align: center;
+    color: #6c757d;
+    padding-top: 15px;
+}
+.report-mo-cnt {
+    flex:1;
+}
+.report-result {
+    width: 100%;
+    height: 100%;
+    font-size: 5rem;
+    text-align: center;
+    font-weight: bold;
+    color: orangered;
+}
+.result-color-none {
+    color: rgb(122, 120, 120);
+}
+.cnt-font{
+    font-size: 1.0rem
+}
+.report-cnt-log {
+    margin-right: -25px;
+    padding-left: 15px;
+}
+.item-icon {
+    color: #6c757d;
+    margin-right: 5px;
+}
+.b-color {
+    color: #fb6767b8;
+}
+.c-color {
+    color: #2673d794;
+}
+.w-color {
+    color: #94949494;
 }
 /* -item { position: absolute; display: none; overflow: hidden; max-width: 100%; height: 100%; line-height: 44px; box-sizing: border-box; padding: 0px 10px 0px 10px; font-size: 16px; text-align: left; vertical-align: top; } */
 
@@ -207,11 +300,29 @@ body::-webkit-scrollbar-track { background-color: rgba(200, 200, 200, 0.3); bord
 #btnArea{
     min-width: 100px;
 }
-#issueArea, #wordArea, #keywordArea {
+#issueArea, #wordArea, #keywordArea, #reportArea {
     overflow: hidden;
 }
 #issueList, #wordList, #keywordList {
     overflow-y: auto;
+}
+#reportTitle{
+    padding: 6px 0 5px 11px;
+    background: #3a3a3a8f;
+    color: white;
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 30px;
+}
+#reportResultTitle{
+    padding: 6px 0 5px 11px;
+    background:#ff1010c7;
+    color: white;
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 30px;
 }
 #issueTitle{
     padding: 6px 0 5px 11px;

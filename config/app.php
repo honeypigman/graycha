@@ -229,7 +229,8 @@ return [
 
         // User Custom
         'Func' => App\Func\Func::class,
-        'Form' => App\Func\Form::class
+        'Form' => App\Func\Form::class,
+        'RestApi' => App\Func\RestApi::class
     ],
 
 ];

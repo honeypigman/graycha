@@ -5,9 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use Log;
-
-// Controller
-use App\Http\Controllers\BlperController;
+use RestApi;
 
 // Model
 use App\BlperRealTimeKeyword;
@@ -47,23 +45,22 @@ class RssGoogleTrend extends Command
     {
         Log::info('SCH RealTimeKeyword-GoogleTrends    Start'.date('Ymd H:i:s'));
 
+        $setQuery = Array(
+            "geo"=>"KR"
+        );
+        $result = Array();
+        $site = "google";
         $today=date('Y-m-d');
-        $site = "gt";
-        $url = env('RSS_GOOGLE_TREND');
-        $blper = app(BlperController::class);
-        $returnValue = $blper->curl($url);
-        
-        // Xml TO Array
-        $getXml = simplexml_load_string($returnValue, "SimpleXMLElement", LIBXML_NOCDATA);
-        $setJson = json_encode($getXml);
-        $getArray = json_decode($setJson,1);
+        $_API['url'] = env('RSS_GOOGLE_TREND');
 
-        foreach($getArray['channel']['item'] as $k=>$data){
+        $api = new RestApi('GOOGLE_TREND', $_API);
+        $res = $api->GET('rss', $setQuery, 'XML');
+
+        foreach($res['channel']['item'] as $k=>$data){
             $result[$k]['site'] = $site;
             $result[$k]['title'] = $data['title'];
             $result[$k]['link'] = $data['link'];
             $result[$k]['date'] = date('Y-m-d', strtotime($data['pubDate']));
-            // $result[$k]['content'] = $data['description'];
         }
 
         // DB
@@ -95,7 +92,7 @@ class RssGoogleTrend extends Command
             $issue->save();
         }
         
-        Log::info('SCH RealTimeKeyword-GoogleTrends    CNT : '.count($getArray['channel']['item']));
+        Log::info('SCH RealTimeKeyword-GoogleTrends    CNT : '.count($res['channel']['item']));
         Log::info('SCH RealTimeKeyword-GoogleTrends    END'.date('Ymd H:i:s'));
         return 0;
     }

@@ -37,4 +37,5 @@ Route::post('/blper/find', 'BlperController@find');
 Route::post('/blper/issue', 'BlperController@issue');
 Route::post('/blper/keyword', 'BlperController@keyword');
 Route::post('/blper/views', 'BlperController@views');
+Route::get('/blper/naverKey', 'BlperController@naverKey');
 // Route::post('/blper/crawling/{site}', 'BlperController@crawling');

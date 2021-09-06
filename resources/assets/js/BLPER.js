@@ -458,8 +458,7 @@ $(function () {
         var tr = "";
         tr += "<tr>"
         tr += "<th scope='row'>" + word + "</th>";
-        tr += "<td>" + monTotalCntPc + "</td>";
-        tr += "<td>" + monTotalCntMo + "</td>";
+        tr += "<td>" + monTotalCntPc + "<br/>" + monTotalCntMo + "</td>";
 
         tr += "<td>" + monCnt_naver_b + " <br/>" + monCnt_daum_b + "</td>";
         tr += "<td>" + monCnt_naver_c + " <br/>" + monCnt_daum_c + "</td>";

@@ -34,10 +34,10 @@
   <form id="form" method="POST" onsubmit="return false;">
     <div class="header-container">
       <div class="row">
-        <div class="col-8">
+        <div class="col-7">
           <input type="text" class="form-control form-control-sm keywordInput" id="kw0" name="kw0" placeholder="키워드" autofocus required>
         </div>
-        <div class="col-4">
+        <div class="col-5">
           <div id="btnArea">
             <button type="button" class="btn btn-outline-primary btn-action float-start mx-1" id="go">
               <i class="fas fa-search"></i>
@@ -211,12 +211,11 @@
           <thead>
             <tr>
               <th scope="col">검색어</th>
-              <th scope="col">PC<br/>검색량</th>
-              <th scope="col">MO<br/>검색량</th>
+              <th scope="col">PC/MO<br/>검색량</th>
               <th scope="col">블로그<br/>문서수</th>
               <th scope="col">카페<br/>문서수</th>
               <th scope="col">웹문서<br/>문서수</th>
-              <th scope="col">문서율(%)</th>
+              <th scope="col">가중치(%)</th>
             </tr>
           </thead>
           <tbody></tbody>

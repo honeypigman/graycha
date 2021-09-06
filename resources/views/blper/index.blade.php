@@ -174,11 +174,13 @@
   </div>
   
   <div class="footer">
-    <div class="float-start">
+    <div class="float-start w-100">
       <div class="text-muted">* 본 서비스는 {{ env('BLPER_DATA_ROOT') }} 연동서비스를 이용한 데이터 기반의 정보를 제공하고 있습니다.</div>
-      <div class="text-muted">Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.</div>
+      <div class="text-muted">
+        Copyright(c)<?php echo date('Y')?> {{ env('ADMIN_EMAIL') }} All rights reserved.
+        <span class="badge rounded-pill  bg-light text-dark float-end" id="views" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewsSearchHisModal">{{ $views ? $views : 0 }}</span>
+      </div>
     </div>
-    <div class="badge rounded-pill  bg-light text-dark float-end pt-4" id="views" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewsSearchHisModal">{{ $views ? $views : 0 }}</div>
   </div>
 </main>
 

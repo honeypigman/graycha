@@ -58,7 +58,7 @@ class BlperController extends Controller
     {        
         // 기본값
         $_DATA = Func::requestToData($request);
-        $query = preg_replace("/[^ㄱ-ㅎㅏ-ㅣ가-힣a-z0-9-,. ]/", "", trim($_DATA['kw0']));
+        $query = preg_replace("/[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9-,. ]/", "", trim($_DATA['kw0']));
             
         // Report
         if(!($this->getReportInfo($query))){
@@ -236,8 +236,9 @@ class BlperController extends Controller
         if(isset($res['keywordList'])){
             foreach( $res['keywordList'] as $k => $datas ){
                 if($k==0){
-                    $result['report']['monTotalCntPc'] = ($datas['monthlyPcQcCnt']>0?number_format($datas['monthlyPcQcCnt']):0);
-                    $result['report']['monTotalCntMo'] = ($datas['monthlyMobileQcCnt']>0?number_format($datas['monthlyMobileQcCnt']):0);
+                    // Default : 10
+                    $result['report']['monTotalCntPc'] = ($datas['monthlyPcQcCnt']>0?number_format($datas['monthlyPcQcCnt']):10);
+                    $result['report']['monTotalCntMo'] = ($datas['monthlyMobileQcCnt']>0?number_format($datas['monthlyMobileQcCnt']):10);
                 }else{
                     if (strpos($datas['relKeyword'], $query) !== false) {
                         $result[$k]['text']=$datas['relKeyword'];

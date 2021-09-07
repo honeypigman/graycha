@@ -446,6 +446,8 @@ $(function () {
     }
 
     function setInitMonthlyInfo() {
+        $("#keyWordGrade").empty().text('-');
+
         $("#monTotalCntPc").empty().text(0);
         $("#monTotalCntMo").empty().text(0);
 

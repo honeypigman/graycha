@@ -92,93 +92,97 @@ class KairspecStationInfoAll extends Command
             Log::info('SCH KairspecStationInfoAll ['.$cityName.'] Res>'.$result);
             $_ARR = json_decode($result, 1);
 
-            foreach( $_ARR['body']['items'] as $item=>$datas ){
-                foreach($datas as $cols){
-                    unset($cnt, $ex_date);
-                    if(empty($cols['dataTime'])){
-                        $cols['dataTime']="0000-00-00 00:00";
-                    } 
-                    $ex_date = explode(' ', $cols['dataTime']);
+            if(isset($_ARR['body']['items'])){
+                foreach( $_ARR['body']['items'] as $item=>$datas ){
+                    foreach($datas as $cols){
+                        unset($cnt, $ex_date);
+                        if(empty($cols['dataTime'])){
+                            $cols['dataTime']="0000-00-00 00:00";
+                        } 
+                        $ex_date = explode(' ', $cols['dataTime']);
 
-                    // Station List Chk
-                    $stat = KairspecApiStationList::where('city', '=', trim($cityName))
-                    ->where('stationName', '=', trim($cols['stationName']))
-                    ->where('date', '=', $ex_date[0])
-                    ->where('time', '=', $ex_date[1])
-                    ->count();
+                        // Station List Chk
+                        $stat = KairspecApiStationList::where('city', '=', trim($cityName))
+                        ->where('stationName', '=', trim($cols['stationName']))
+                        ->where('date', '=', $ex_date[0])
+                        ->where('time', '=', $ex_date[1])
+                        ->count();
 
-                    // Insert StationList
-                    if(empty($stat)){
+                        // Insert StationList
+                        if(empty($stat)){
 
 
-                        $api = new KairspecApiStationList();
-                        $api->date = $ex_date[0];
-                        $api->time = $ex_date[1];
-                        $api->city = $cityName;
-                        $api->stationName = $cols['stationName'];
-                        $api->pm10Value=$cols['pm10Value'];
-                        $api->pm10Value24=$cols['pm10Value24'];
-                        $api->pm25Value=$cols['pm25Value'];
-                        $api->pm25Value24=$cols['pm25Value24'];
-                        $api->save();
-                    }
+                            $api = new KairspecApiStationList();
+                            $api->date = $ex_date[0];
+                            $api->time = $ex_date[1];
+                            $api->city = $cityName;
+                            $api->stationName = $cols['stationName'];
+                            $api->pm10Value=$cols['pm10Value'];
+                            $api->pm10Value24=$cols['pm10Value24'];
+                            $api->pm25Value=$cols['pm25Value'];
+                            $api->pm25Value24=$cols['pm25Value24'];
+                            $api->save();
+                        }
 
-                    // Msesure List Chk
-                    $obj = KairspecApiMsrstnList::select('_id')
-                    ->where('city', '=', trim($cityName))
-                    ->where('today', '=', $today)
-                    ->where('stationName', '=', trim($cols['stationName']))
-                    ->orderBy('today', 'desc')
-                    ->take(1)
-                    ->get();
+                        // Msesure List Chk
+                        $obj = KairspecApiMsrstnList::select('_id')
+                        ->where('city', '=', trim($cityName))
+                        ->where('today', '=', $today)
+                        ->where('stationName', '=', trim($cols['stationName']))
+                        ->orderBy('today', 'desc')
+                        ->take(1)
+                        ->get();
 
-                    // Collection ObjectId
-                    if(empty($obj[0]['_id'])){
-                        $oid=null;
-                    }else{
-                        $oid = $obj[0]['_id'];
-                    }
+                        // Collection ObjectId
+                        if(empty($obj[0]['_id'])){
+                            $oid=null;
+                        }else{
+                            $oid = $obj[0]['_id'];
+                        }
 
-                    // Update MsrstnList
-                    unset($api);
-                    if($oid){
-                        Log::info($oid." > ".$cityName."/".$today."/".$cols['stationName']);
-                        $api = KairspecApiMsrstnList::find($oid);
-                        $api->time = $time;
-                        $api->mesure_time=$cols['dataTime'];
-                        $api->so2Value=$cols['so2Value'];
-                        $api->coValue=$cols['coValue'];
-                        $api->o3Value=$cols['o3Value'];
-                        $api->no2Value=$cols['no2Value'];
-                        $api->pm10Value=$cols['pm10Value'];
-                        $api->pm10Value24=$cols['pm10Value24'];
-                        $api->pm25Value=$cols['pm25Value'];
-                        $api->pm25Value24=$cols['pm25Value24'];
-                        $api->khaiValue=$cols['khaiValue'];
-                        $api->khaiGrade=$cols['khaiGrade'];
-                        $api->so2Grade=$cols['so2Grade'];
-                        $api->coGrade=$cols['coGrade'];
-                        $api->o3Grade=$cols['o3Grade'];
-                        $api->no2Grade=$cols['no2Grade'];
-                        $api->pm10Grade=$cols['pm10Grade'];
-                        $api->pm25Grade=$cols['pm25Grade'];
-                        $api->pm10Grade1h=$cols['pm10Grade1h'];
-                        $api->pm25Grade1h=$cols['pm25Grade1h'];
-                        $api->save();
-                        
-                    }else{
-                        Log::info("ERR>Invalid Station Name > ".$cityName."/".$today."/".$cols['stationName']);
-                        
-                        // $api = new KairspecApiStationNotFoundList();
-                        // $api->today = $today;
-                        // $api->time = $time;
-                        // $api->city = $cityName;
-                        // $api->stationName = $cols['stationName'];
-                        // $api->save();
+                        // Update MsrstnList
+                        unset($api);
+                        if($oid){
+                            Log::info($oid." > ".$cityName."/".$today."/".$cols['stationName']);
+                            $api = KairspecApiMsrstnList::find($oid);
+                            $api->time = $time;
+                            $api->mesure_time=$cols['dataTime'];
+                            $api->so2Value=$cols['so2Value'];
+                            $api->coValue=$cols['coValue'];
+                            $api->o3Value=$cols['o3Value'];
+                            $api->no2Value=$cols['no2Value'];
+                            $api->pm10Value=$cols['pm10Value'];
+                            $api->pm10Value24=$cols['pm10Value24'];
+                            $api->pm25Value=$cols['pm25Value'];
+                            $api->pm25Value24=$cols['pm25Value24'];
+                            $api->khaiValue=$cols['khaiValue'];
+                            $api->khaiGrade=$cols['khaiGrade'];
+                            $api->so2Grade=$cols['so2Grade'];
+                            $api->coGrade=$cols['coGrade'];
+                            $api->o3Grade=$cols['o3Grade'];
+                            $api->no2Grade=$cols['no2Grade'];
+                            $api->pm10Grade=$cols['pm10Grade'];
+                            $api->pm25Grade=$cols['pm25Grade'];
+                            $api->pm10Grade1h=$cols['pm10Grade1h'];
+                            $api->pm25Grade1h=$cols['pm25Grade1h'];
+                            $api->save();
+                            
+                        }else{
+                            Log::info("ERR>Invalid Station Name > ".$cityName."/".$today."/".$cols['stationName']);
+                            
+                            // $api = new KairspecApiStationNotFoundList();
+                            // $api->today = $today;
+                            // $api->time = $time;
+                            // $api->city = $cityName;
+                            // $api->stationName = $cols['stationName'];
+                            // $api->save();
+                        }
                     }
                 }
+                Log::info('SCH KairspecStationInfoAll ['.$cityName.'] Res>OK');
+            }else{
+                Log::info('SCH KairspecStationInfoAll Fail >'.$_ARR['body']['items']);
             }
-            Log::info('SCH KairspecStationInfoAll ['.$cityName.'] Res>OK');
         }
     }
 }

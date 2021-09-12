@@ -121,7 +121,7 @@
       </div>
     </div>
 
-    <div class="row line1">
+    <div class="row line1 d-none" id="searchArea">
       <!-- Seg1. Search List -->
       <div class="col py-1 line1-seg-1">
         <div id="tabs" class="frame-form">

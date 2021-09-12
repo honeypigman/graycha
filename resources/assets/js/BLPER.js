@@ -256,7 +256,7 @@ $(function () {
                         $("#keyWordGrade").removeClass();
                         $("#keyWordGrade").addClass(gradeColor);
 
-                        // Monthly Report
+                        // Line Show
                         $("#monthlyReport").removeClass('d-none');
 
                         // Monthly His ADD
@@ -409,6 +409,8 @@ $(function () {
     function setInit() {
         var result = false;
         if ($("#kw0").val()) {
+
+            $("#searchArea").removeClass('d-none');
             $("#tab-nav").css({ 'display': 'block' });
             $("#wordTitle").css({ 'display': 'block' });
             $("#wordList").empty().html(spinner());

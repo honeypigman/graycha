@@ -425,6 +425,7 @@ $(function () {
         var result = false;
         if ($("#kw0").val()) {
 
+            $("#monthlyReport").addClass('d-none');
             $("#searchArea").removeClass('d-none');
             $("#tab-nav").css({ 'display': 'block' });
             $("#wordTitle").css({ 'display': 'block' });

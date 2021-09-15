@@ -89,7 +89,7 @@ $(function () {
                         default:
                             color = 'primary';
                     }
-                    list += "<button type='button' class='btn btn-outline-" + color + " m-1'>" + (this.query) + "</button>";
+                    list += "<button type='button' class='searchWords btn btn-outline-" + color + " m-1'>" + (this.query) + "</button>";
                 })
                 $("#viewsSearchHisModalBody").empty().append(list);
             },
@@ -157,6 +157,21 @@ $(function () {
         window.open(link);
 
         return false;
+    })
+
+    // 검색이력 찾기
+    $(document).on("click", ".searchWords", function (e) {
+
+        $(".modal").modal("hide");
+
+        $("#kw0").val($(this).text());
+        var word = validKeyword('kw0');
+
+        if (setInit()) {
+            // Add Tab and Submit
+            var tabs_id = addTabs(word);
+            submit('GO', tabs, tabs_id);
+        }
     })
 
     var submit = function (action = null, tabs = null, id = null) {

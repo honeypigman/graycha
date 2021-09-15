@@ -114,10 +114,12 @@ $(function () {
 
         var word = validKeyword('kw0');
 
-        // Add Tab and Submit
-        var tabs_id = addTabs(word);
+        if (setInit()) {
+            // Add Tab and Submit
+            var tabs_id = addTabs(word);
 
-        submit('ADD', tabs, tabs_id);
+            submit('ADD', tabs, tabs_id);
+        }
     });
 
     // Close icon: removing the tab on click
@@ -200,6 +202,8 @@ $(function () {
             data: (formData),
             success: function (rs) {
 
+                var no_msg = "<div id='" + id + "' class='set-top text-muted'>- 검색결과 없음 -</div>";
+
                 if (rs.code == '0000') {
 
                     // 검색결과
@@ -251,7 +255,8 @@ $(function () {
                         tabs.tabs("refresh");
 
                         // Word List
-                        if (action == 'GO') {
+                        //if (action == 'GO') 
+                        {
                             $("#wordList").empty().append(words);
                         }
                         $("b").css({ 'color': '#fa8ba0' });
@@ -296,15 +301,15 @@ $(function () {
                 }
 
                 else {
-                    var msg = "<div id='" + id + "' class='set-top text-muted'>- 검색결과 없음 -</div>";
-
                     // Search List
                     $("#" + id).remove();
-                    tabs.append(msg);
+                    tabs.append(no_msg);
                     tabs.tabs("refresh");
+                }
 
-                    // Word List
-                    $("#wordList").empty().append(msg);
+                // Word List
+                if (!words) {
+                    $("#wordList").empty().append(no_msg);
                 }
 
             },

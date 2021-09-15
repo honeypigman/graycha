@@ -34,10 +34,18 @@
   <form id="form" method="POST" onsubmit="return false;">
     <div class="header-container">
       <div class="row">
-        <div class="col-7">
+        <!-- <div class="col-7">
           <input type="text" class="form-control form-control-sm keywordInput" id="kw0" name="kw0" placeholder="키워드" autofocus required>
+        </div> -->
+
+        <div class="input-group mb-5" style="padding-right: 30px;">
+          <input type="text" class="form-control form-control-lg keywordInput" placeholder="키워드 입력" aria-describedby="button-addon" id="kw0" name="kw0" autofocus required>
+          <button class="btn btn-outline-primary" type="button" id="go"><i class="fas fa-search"></i></button>
+          <button class="btn btn-outline-success" type="button" id="reset"><i class="fas fa-sync-alt"></i></button>
+          <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#viewsMonthlyHisModal" id="history"><i class="fas fa-list"></i></button>
         </div>
-        <div class="col-5">
+
+        <!-- <div class="col-5">
           <div id="btnArea">
             <button type="button" class="btn btn-outline-primary btn-action float-start mx-1" id="go">
               <i class="fas fa-search"></i>
@@ -49,7 +57,7 @@
               <i class="fas fa-list"></i>
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </form>

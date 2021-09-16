@@ -58,9 +58,9 @@ class Kernel extends ConsoleKernel
 
         
         // Blper 실시간 키워드정보 취득 - 구글 트랜드 / 매시간 업데이트
-        $schedule->command('blper:getRssGoogleTrend')->hourlyAt(5); 
+        $schedule->command('blper:getRssGoogleTrend')->hourlyAt(10); 
         // Blper 실시간 이슈정보 취득 - 한국 정책 브리핑 / 매시간 37분 업데이트
-        $schedule->command('blper:getRssKoreaIssue')->hourlyAt(40); 
+        $schedule->command('blper:getRssKoreaIssue')->hourlyAt(05); 
     }
 
     /**

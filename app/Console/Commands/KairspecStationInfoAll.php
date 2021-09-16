@@ -56,7 +56,7 @@ class KairspecStationInfoAll extends Command
         );
 
         foreach( $_SIDO as $k=>$cityName ){
-            usleep(3000);
+            usleep(10000);
             
             if($k==8){
                 sleep(60);
@@ -94,6 +94,7 @@ class KairspecStationInfoAll extends Command
 
             if(isset($_ARR['body']['items'])){
                 foreach( $_ARR['body']['items'] as $item=>$datas ){
+                    usleep(10000);
                     foreach($datas as $cols){
                         unset($cnt, $ex_date);
                         if(empty($cols['dataTime'])){

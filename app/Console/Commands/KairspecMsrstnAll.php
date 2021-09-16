@@ -54,7 +54,7 @@ class KairspecMsrstnAll extends Command
         );
 
         foreach( $_SIDO as $k=>$cityName ){
-            usleep(3000);
+            usleep(10000);
             // 시도내역을 한번에 땡길 경우, 충북까지만 응답받고 트래픽 이슈로 중단되어 경기까지 응답 후 1분 지연
             if($k==8){
                 sleep(60);
@@ -85,6 +85,7 @@ class KairspecMsrstnAll extends Command
             $_ARR = json_decode($result, 1);
 
             foreach( $_ARR['body']['items'] as $item=>$datas ){
+                usleep(10000);
                 foreach($datas as $cols){
                     
                     // today, city, stationName

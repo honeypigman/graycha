@@ -9,6 +9,9 @@ $(function () {
     var tabCounter = 1;
     var tabs = $("#tabs").tabs();
 
+    // Chard Default
+    setChart();
+
     // 실시간 이슈
     hotIssue();
 
@@ -246,7 +249,10 @@ $(function () {
                                 words += "</div>";
                             }
                         })
-                    })
+                    });
+
+                    // Set Chart
+                    setChart(rs['trend']);
 
                     if (id) {
                         // Search List
@@ -414,8 +420,7 @@ $(function () {
 
     function validKeyword(id) {
         var result = null;
-        result = ($("#" + id).val()).replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-z0-9\u318D\u119E\u11A2\u2022\u2025a\u00B7\uFE55\s-,. ]/gi, '');
-
+        result = ($("#" + id).val()).replace(/[^ㄱ-힣a-zA-Z0-9\u318D\u119E\u11A2\u2022\u2025a\u00B7\uFE55\s-,. ]/gi, '');
 
         if (!result.replace(/ /g, '')) {
             $("#" + id).focus();
@@ -511,5 +516,88 @@ $(function () {
 
         $("#viewsMonthlyHisModalBody tbody").prepend(tr);
 
+    }
+
+    function setChart(datas = null) {
+
+        let trend_all = [];
+        let trend_bg = [];
+        let trend_period = [];
+        // let trend_pc = [];
+        // let trend_mo = [];
+
+        // 초기화
+        $('#myChart').remove();
+        $('#ketywordTrendChart').append('<canvas class="my-4 w-100 bchartjs-render-monitor" id="myChart" style="display: block;"></canvas>');
+
+        // 검색 시
+        if (datas) {
+
+            var trend_sum_ratio = 0;
+            // 데이터 셋팅
+            $.each(datas, function (device) {
+                $.each(datas[device], function () {
+                    trend_sum_ratio += this.ratio;
+
+                    trend_bg.push('rgb(255 183 0 / 72%)');
+                    eval('trend_' + device).push(this.ratio);
+                    if (trend_period.indexOf(this.period) < 0)
+                        trend_period.push(this.period);
+
+                });
+            });
+
+            // 평균값
+            if (trend_sum_ratio > 0) {
+                trend_bg.push('rgb(0 76 216 / 72%)');
+                trend_all.push(Math.floor(trend_sum_ratio / datas['all'].length));
+                trend_period.push('평균');
+            }
+        }
+
+        datas = {
+            labels: trend_period,
+            datasets: [
+                {
+                    label: 'pc',
+                    backgroundColor: trend_bg,
+                    fill: false,
+                    data: trend_all,
+                    yAxisID: 'y-axis-1',
+                }
+                // {
+                //     label: 'pc',
+                //     backgroundColor: 'rgb(75 182 55 / 72%)',
+                //     fill: false,
+                //     data: trend_pc,
+                //     yAxisID: 'y-axis-1',
+                // }, {
+                //     label: 'mobile',
+                //     backgroundColor: 'rgb(0 76 216 / 72%)',
+                //     fill: false,
+                //     data: trend_mo,
+                //     yAxisID: 'y-axis-1'
+                // }
+            ]
+        };
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: datas,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '키워드 추이'
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
     }
 })

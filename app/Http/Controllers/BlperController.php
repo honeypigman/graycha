@@ -10,6 +10,7 @@ use RestApi;
 use App\BlperRealtimeIssue;
 use App\BlperRealTimeKeyword;
 use App\BlperClientInfo;
+use App\BlperApiCount;
 
 class BlperController extends Controller
 {
@@ -70,9 +71,12 @@ class BlperController extends Controller
             abort(404);
         }else{
             
-            // Api연동
+            // Search Api연동
             $result['items']['daum'] = $this->SearchApiDaum($query);
             $result['items']['naver'] = $this->SearchApiNaver($query);
+            
+            // DataLab Api연동
+            $result['trend'] = $this->DatalabApiNaver($query);
                     
             // 코드
             $result['code']=((count($result['items']['daum'])>0 || count($result['items']['naver'])>0)?'0000':'9999');
@@ -345,6 +349,88 @@ class BlperController extends Controller
         return $result;
     }
 
+    private function DatalabApiNaver($query)
+    {
+        $res = null;
+
+        if(!$this->shallIapiCall('NAVER_DATALAB_SEARCH'))
+            return $res;
+
+        $date_s = date("Y-m", strtotime("-".env('NAVER_DATALAB_SEARCH_TERM')."month"))."-01";
+        $date_e = datE("Y-m-d");
+        
+        // Naver Search Contents
+        $_API['url'] = env('NAVER_DATALAB_URL');
+        $_API['id'] = env('NAVER_DATALAB_ID');
+        $_API['secret'] = env('NAVER_DATALAB_SECRET');        
+        $api = new RestApi('NAVER_DATALAB', $_API);
+        
+        // 월별 추이 기본은 MO / PC
+        // $_DEV = Array("pc", "mo");
+        $_DEV = Array("all");
+        foreach( $_DEV as $device ){
+
+            $setQuery = Array(
+                "startDate" => $date_s,                             //  Y yyyy-mm-dd 형식
+                "endDate" =>  $date_e,                              //  Y yyyy-mm-dd 형식
+                "timeUnit" => "week",                              //  Y date: 일간 / week: 주간 / month: 월간
+                "keywordGroups" => Array(
+                    0=>Array(
+                        "groupName" => $query,
+                        "keywords" => Array(
+                            $query
+                        )
+                    )
+                ),
+                // "device" => $device
+            );
+            $res[$device] = $api->POST($setQuery);  
+        }
+
+        return $res;
+    }
+
+    public function shallIapiCall($apiName){
+        
+        $result = false;
+        $today = date('Y-m-d');
+
+        // DB
+        $db = BlperApiCount::select('cnt')
+        ->where('today', '=', $today)
+        ->where('name', '=', $apiName)
+        ->take(1)
+        ->get();
+
+        // Collection Object Cnt
+        if(empty($db[0]['cnt'])){
+            $cnt=null;
+        }else{
+            $cnt = $db[0]['cnt'];
+        }
+
+        // Update
+        if($cnt>0){
+            if($cnt<env($apiName."_LIMIT")){
+                $api = BlperApiCount::where('today', '=', $today)
+                ->where('name', '=', $apiName)
+                ->update(['cnt'=>($cnt+1)]);
+
+                $result = true;
+            }
+        }else{
+            $api = new BlperApiCount();
+            $api->today = $today;
+            $api->name = $apiName;
+            $api->cnt = ($cnt+1);
+            $api->save();
+
+            $result = true;
+        }
+
+        return $result;
+    }
+
     protected function getGrade( $arrWord=Array(), $arrNaver=Array(), $arrDaum=Array() ){
         
         $monTotalCnt = 0;
@@ -370,9 +456,18 @@ class BlperController extends Controller
             }
         }
 
+        // if(count($arrTrend['all'])>0){
+        //     $trendRatio = 0;
+        //     $tendSum=0;
+            
+        //     foreach($arrTrend['all'] as $data){
+        //         $tendSum+=floor($data['ratio']);
+        //     }
+        //     $trendAvgRatio = round($tendSum/count($arrTrend['all']),2);
+        // }
+
         // 비율 : 전체문서수 / (총 조회수)
-        $rate = round(($monNaverCnt+$monDaumCnt/2)/$monTotalCnt,2);
-        
+        $rate = round(($monNaverCnt+$monDaumCnt/2)/$monTotalCnt,2);        
 
         $arrGradeMatrix = Array(
             1 => array(0, 0.05),

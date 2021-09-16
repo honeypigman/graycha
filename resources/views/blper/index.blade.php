@@ -76,8 +76,8 @@
             </span>
           </div>
           <div class="report-cnt-form">
-            <span class="report-mo-cnt"><i class="fas fa-desktop fa-2x"></i><div>[pc]</div></span>
-            <span class="report-mo-cnt"><i class="fas fa-mobile-alt fa-2x"></i><div>[mo]</div></span>
+            <span class="report-mo-cnt pc-color"><i class="fas fa-desktop fa-2x"></i><div>[pc]</div></span>
+            <span class="report-mo-cnt mo-color"><i class="fas fa-mobile-alt fa-2x"></i><div>[mo]</div></span>
           </div>
           <div class="report-cnt-form">
             <span class="report-mo-cnt cnt-font" id="monTotalCntPc">0</span>
@@ -127,6 +127,10 @@
           <div class="report-result"><span id="keyWordGrade">-</span></div>
         </div>
       </div>
+
+      <!-- Chart -->
+      <div class="col-12" id="ketywordTrendChart" style="height:300px;"></div>
+
     </div>
 
     <div class="row line1 d-none" id="searchArea">
@@ -178,7 +182,7 @@
       </div>
     </div>
   </div>
-  
+ 
   <div class="footer">
     <div class="float-start w-100">
       <div class="text-muted">* 본 서비스는 {{ env('BLPER_DATA_ROOT') }} 연동서비스를 이용한 데이터 기반의 정보를 제공하고 있습니다.</div>
@@ -237,6 +241,7 @@
 
 <!-- script -->
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/chart.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.ui.min.js"></script>
 <script src="{{ mix('/js/blper.js') }}"></script>

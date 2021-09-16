@@ -16,7 +16,7 @@ class RestApi
     {   
         unset($this->api);
         $this->target = $target;
-        if( $target == "NAVER_SEARCH" ){
+        if( $target == "NAVER_SEARCH" || $target == "NAVER_DATALAB" ){
             $this->api['url'] = $API['url'];
             $this->api['id'] = $API['id'];
             $this->api['secret'] = $API['secret'];
@@ -61,6 +61,14 @@ class RestApi
                     'X-Naver-Client-Secret: ' . $this->api['secret'],
                 );
                 break;
+
+            case 'NAVER_DATALAB':
+                $header = array(
+                    'Content-Type: application/json; charset=UTF-8',
+                    'X-Naver-Client-Id: ' . $this->api['id'],
+                    'X-Naver-Client-Secret: ' . $this->api['secret'],
+                );
+                break;    
             
             case 'NAVER_AD':
                 $timestamp = $this->getTimestamp();
@@ -148,5 +156,37 @@ class RestApi
         }
 
         return $res['array'];
+    }
+
+    public function POST($query)
+    {
+        $ch = curl_init();
+        if (!$ch) {
+            die ("ERR>Init cURL handle");
+        }
+
+        $body = json_encode($query, JSON_UNESCAPED_UNICODE);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->api['url']);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeader('POST'));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+
+        $output = curl_exec ($ch);
+        $result_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close ($ch);        
+        
+        $res = json_decode($output, true);
+
+        if (!empty ($error)) {
+            echo "error : $error\n";
+            die("failed to request");
+        }
+
+        return $res['results'][0]['data'];
     }
 }

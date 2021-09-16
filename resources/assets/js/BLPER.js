@@ -559,7 +559,7 @@ $(function () {
             labels: trend_period,
             datasets: [
                 {
-                    label: 'pc',
+                    label: '추이',
                     backgroundColor: trend_bg,
                     fill: false,
                     data: trend_all,

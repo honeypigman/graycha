@@ -187,8 +187,10 @@ class RestApi
         }
 
         // Naver DataLab Hmm...
-        if($res['errorCode']=="010"){
-            $res['results'][0]['data']=null;
+        if(isset($res['errorCode'])){
+            if($res['errorCode']=="010"){
+                $res['results'][0]['data']=null;
+            }
         }
 
         return $res['results'][0]['data'];

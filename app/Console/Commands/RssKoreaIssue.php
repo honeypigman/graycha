@@ -42,6 +42,11 @@ class RssKoreaIssue extends Command
      */
     public function handle()
     {
+        if(env('Batch_blper_getRssKoreaIssue')!="Y"){
+            Log::info('SCH RssKoreaIssue    Batch Stop');
+            exit;
+        }
+
         Log::info('SCH RssKoreaIssue    Start'.date('Ymd H:i:s'));
 
         $setQuery = Array();

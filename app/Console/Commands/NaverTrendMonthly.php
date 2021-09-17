@@ -43,6 +43,11 @@ class NaverTrendMonthly extends Command
      */
     public function handle()
     {
+        if(env('Batch_blper_getNaverRelationTrend')!="Y"){
+            Log::info('SCH NaverTrendMonthly    Batch Stop');
+            exit;
+        }
+
         Log::info('SCH NaverTrendMonthly    Start'.date('Ymd H:i:s'));
 
         $date = date("Ym");
@@ -113,7 +118,6 @@ class NaverTrendMonthly extends Command
 
         // 조회가능 회수
         $remaining_cnt = env('NAVER_DATALAB_SEARCH_LIMIT') - $api_cnt;
-        // $remaining_cnt = 300;
 
         Log::info('SCH NaverTrendMonthly    DataLab Remaining Search Cnt  => '.$remaining_cnt);
         if($remaining_cnt>0){
@@ -170,6 +174,8 @@ class NaverTrendMonthly extends Command
                         ->update(['status'=>'Y', 'period'=>$getPeriod, 'ratio'=>$getRatio]);
 
                         Log::info('SCH NaverTrendMonthly    DataLab Update => '.$keyword);
+                    }else{
+                        Log::info('SCH NaverTrendMonthly    DataLab Empty');
                     } 
                 }
             }

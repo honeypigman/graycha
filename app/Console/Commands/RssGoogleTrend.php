@@ -43,6 +43,11 @@ class RssGoogleTrend extends Command
      */
     public function handle()
     {
+        if(env('Batch_blper_getRssGoogleTrend')!="Y"){
+            Log::info('SCH RealTimeKeyword-GoogleTrends    Batch Stop');
+            exit;
+        }
+
         Log::info('SCH RealTimeKeyword-GoogleTrends    Start'.date('Ymd H:i:s'));
 
         $setQuery = Array(

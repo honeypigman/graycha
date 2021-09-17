@@ -47,6 +47,11 @@ class KairspecMsrstnAll extends Command
      */
     public function handle()
     {
+        if(env('Batch_kairspec_getMsrstnInfoAll')!="Y"){
+            Log::info('SCH KairspecMsrstnAll    Batch Stop');
+            exit;
+        }
+
         // 전국 시도
         $_SIDO = Array(
             "서울", "부산", "대구", "인천", "광주", "대전", "울산", "경기",

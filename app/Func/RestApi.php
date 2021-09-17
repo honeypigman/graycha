@@ -183,8 +183,12 @@ class RestApi
         $res = json_decode($output, true);
 
         if (!empty ($error)) {
-            echo "error : $error\n";
-            die("failed to request");
+            $res['results'][0]['data']=null;
+        }
+
+        // Naver DataLab Hmm...
+        if($res['errorCode']=="010"){
+            $res['results'][0]['data']=null;
         }
 
         return $res['results'][0]['data'];

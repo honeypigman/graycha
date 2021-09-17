@@ -227,7 +227,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title" id="viewsMonthlyTrendModalLabel"> 월별추이 {{ date('Y-m') }} </h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div>
+          <i class="fas fa-exchange-alt text-muted px-2 fs-6 trend-exchange" id="btn-trend-exchange"></i>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
       </div>
       <div class="modal-body d-flex align-content-between flex-wrap" id="viewsMonthlyTrendModalBody"></div>
     </div>
@@ -239,6 +242,7 @@
 <script src="/js/chart.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.ui.min.js"></script>
-<script src="{{ mix('/js/blper.js') }}"></script>
+<script src="/js/blper.js"></script>
+<!-- <script src="{{ mix('/js/blper.js') }}"></script> -->
 </body>
 </html>

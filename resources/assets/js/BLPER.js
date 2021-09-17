@@ -18,9 +18,6 @@ $(function () {
     // 실시간 키워드
     hotKeyword();
 
-    // 월별 트랜드
-    monthlyTrend();
-
     // 기본설정
     $("#kw0").focus();
 
@@ -57,6 +54,14 @@ $(function () {
     $("#reset").on("click", function () {
         location.reload();
         // $("form")[0].reset();
+    });
+
+    // Trend
+    $("#trend").on("click", function () {
+        monthlyTrend();
+    });
+    $("#btn-trend-exchange").on("click", function () {
+        monthlyTrend();
     });
 
     // Views
@@ -437,6 +442,9 @@ $(function () {
 
     // 월별 트랜드 추이
     function monthlyTrend() {
+
+        $("#viewsMonthlyTrendModalBody").empty().html(spinner());
+
         $.ajax({
             method: "POST",
             url: "/blper/trend",
@@ -447,6 +455,9 @@ $(function () {
             success: function (rs) {
 
                 if (rs.code == '0000') {
+
+                    $("#viewsMonthlyTrendModalBody").empty();
+
                     var cnt = 1;
                     var chart = "";
 
@@ -529,7 +540,7 @@ $(function () {
     }
 
     function spinner() {
-        return "<div class=\"set-spinner text-center\"><div class=\"spinner-grow text-primary\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div><div class=\"spinner-grow text-warning\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div><div class=\"spinner-grow text-success\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div><div class=\"spinner-grow text-danger\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div></div>";
+        return "<div class=\"set-spinner text-center w-100\"><div class=\"spinner-grow text-primary\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div><div class=\"spinner-grow text-warning\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div><div class=\"spinner-grow text-success\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div><div class=\"spinner-grow text-danger\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div></div>";
     }
 
     function addTabs(word) {

@@ -4,7 +4,7 @@
 .card-list:hover { background-color: #fae0e094; color: #000000; }
 .card:hover { background-color: #fae0e094; color: #000000; }
 .item-list:hover { background-color: #fae0e094; color: #000000; }
-
+.trend-exchange:hover { cursor: pointer; }
 /* style */
 html { 
     scroll-behavior: smooth; 

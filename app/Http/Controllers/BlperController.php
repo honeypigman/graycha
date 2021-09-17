@@ -494,10 +494,10 @@ class BlperController extends Controller
     public function trend(Request $request){
 
         $date = date('Ym');
-        $list = BlperRelationKeywordTrend::select('no','keyword','period', 'ratio')
+        $list = BlperRelationKeywordTrend::all()
         ->where('date', '=', $date)
         ->where('status', '=', 'Y')
-        ->get();
+        ->random(env('NAVER_TREND_GET_LIMIT'));
 
         $result = Array();
         $result['code']='9999';

@@ -63,36 +63,39 @@ class RssGoogleTrend extends Command
             $result[$k]['date'] = date('Y-m-d', strtotime($data['pubDate']));
         }
 
-        // DB
-        $obj = BlperRealTimeKeyword::select('_id')
-        ->where('today', '=', $today)
-        ->take(1)
-        ->get();
+        try{
+            // DB
+            $obj = BlperRealTimeKeyword::select('_id')
+            ->where('today', '=', $today)
+            ->take(1)
+            ->get();
 
-        // Collection ObjectId
-        if(empty($obj[0]['_id'])){
-            $oid=null;
-        }else{
-            $oid = $obj[0]['_id'];
-        }
+            // Collection ObjectId
+            if(empty($obj[0]['_id'])){
+                $oid=null;
+            }else{
+                $oid = $obj[0]['_id'];
+            }
 
-        // Update
-        if($oid){
-            $issue = BlperRealTimeKeyword::find($oid);
-            $issue->today = $today;
-            $issue->items = json_encode($result);
-            $issue->save();
-        }
+            // Update
+            if($oid){
+                $issue = BlperRealTimeKeyword::find($oid);
+                $issue->today = $today;
+                $issue->items = json_encode($result);
+                $issue->save();
+            }
 
-        // Save
-        else{
-            $issue = new BlperRealTimeKeyword();
-            $issue->today = $today;
-            $issue->items = json_encode($result);
-            $issue->save();
+            // Save
+            else{
+                $issue = new BlperRealTimeKeyword();
+                $issue->today = $today;
+                $issue->items = json_encode($result);
+                $issue->save();
+            }  
+            Log::info('SCH RealTimeKeyword-GoogleTrends    CNT : '.count($res['channel']['item']));
+        }catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e) {
+            Log::info("ERR>MongoDB\Driver\Exception\ConnectionTimeoutException > ".$e->getMessage());
         }
-        
-        Log::info('SCH RealTimeKeyword-GoogleTrends    CNT : '.count($res['channel']['item']));
         Log::info('SCH RealTimeKeyword-GoogleTrends    END'.date('Ymd H:i:s'));
         return 0;
     }

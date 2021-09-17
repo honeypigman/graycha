@@ -84,54 +84,60 @@ class KairspecMsrstnAll extends Command
             Log::info('SCH KairspecMsrstnAll ['.$cityName.'] Res>'.$result);
             $_ARR = json_decode($result, 1);
 
-            foreach( $_ARR['body']['items'] as $item=>$datas ){
-                usleep(10000);
-                foreach($datas as $cols){
-                    
-                    // today, city, stationName
-                    $obj = KairspecApiMsrstnList::select('_id')
-                    ->where('city', '=', trim($cityName))
-                    ->where('today', '=', $today)
-                    ->where('stationName', '=', trim($cols['stationName']))
-                    ->orderBy('today', 'desc')
-                    ->take(1)
-                    ->get();
+            try{
+                if(isset($_ARR['body']['items'])){
+                    foreach( $_ARR['body']['items'] as $item=>$datas ){
+                        usleep(10000);
+                        foreach($datas as $cols){
+                            
+                            // today, city, stationName
+                            $obj = KairspecApiMsrstnList::select('_id')
+                            ->where('city', '=', trim($cityName))
+                            ->where('today', '=', $today)
+                            ->where('stationName', '=', trim($cols['stationName']))
+                            ->orderBy('today', 'desc')
+                            ->take(1)
+                            ->get();
 
-                    // Collection ObjectId
-                    if(empty($obj[0]['_id'])){
-                        $oid=null;
-                    }else{
-                        $oid = $obj[0]['_id'];
+                            // Collection ObjectId
+                            if(empty($obj[0]['_id'])){
+                                $oid=null;
+                            }else{
+                                $oid = $obj[0]['_id'];
+                            }
+                                                
+                            unset($api);
+                            if($oid){
+                                Log::info($oid." > ".$cityName."/".$today."/".$cols['stationName']);
+                                $api = KairspecApiMsrstnList::find($oid);
+                                $api->today = $today;
+                                $api->time = $time;
+                                $api->city = $cityName;
+                                $api->stationName = $cols['stationName'];
+                                $api->addr = $cols['addr'];
+                                $api->dmX = $cols['dmX'];
+                                $api->dmY = $cols['dmY'];
+                                $api->save();
+                                
+                            }else{
+                                Log::info("New > ".$cityName."/".$today."/".$cols['stationName']);
+                                $api = new KairspecApiMsrstnList();
+                                $api->today = $today;
+                                $api->time = $time;
+                                $api->city = $cityName;
+                                $api->stationName = $cols['stationName'];
+                                $api->addr = $cols['addr'];
+                                $api->dmX = $cols['dmX'];
+                                $api->dmY = $cols['dmY'];
+                                $api->save();
+                            }
+                        }
                     }
-                                        
-                    unset($api);
-                    if($oid){
-                        Log::info($oid." > ".$cityName."/".$today."/".$cols['stationName']);
-                        $api = KairspecApiMsrstnList::find($oid);
-                        $api->today = $today;
-                        $api->time = $time;
-                        $api->city = $cityName;
-                        $api->stationName = $cols['stationName'];
-                        $api->addr = $cols['addr'];
-                        $api->dmX = $cols['dmX'];
-                        $api->dmY = $cols['dmY'];
-                        $api->save();
-                        
-                    }else{
-                        Log::info("New > ".$cityName."/".$today."/".$cols['stationName']);
-                        $api = new KairspecApiMsrstnList();
-                        $api->today = $today;
-                        $api->time = $time;
-                        $api->city = $cityName;
-                        $api->stationName = $cols['stationName'];
-                        $api->addr = $cols['addr'];
-                        $api->dmX = $cols['dmX'];
-                        $api->dmY = $cols['dmY'];
-                        $api->save();
-                    }
+                    Log::info('SCH KairspecMsrstnAll ['.$cityName.'] Res>OK');
                 }
+            }catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e) {
+                Log::info("ERR>MongoDB\Driver\Exception\ConnectionTimeoutException > ".$e->getMessage());
             }
-            Log::info('SCH KairspecMsrstnAll ['.$cityName.'] Res>OK');
         }
     }
 }

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="블퍼::블로그 포스팅 작성을 위한 도우미 서비스">
-  <meta name="keywords" content="포스팅 서비스, 실시간 이슈, 실시간 키워드, 연관 검색어">
+  <meta name="keywords" content="실시간 이슈, 실시간 키워드, 키워드 추이, 월별 키워드 추이, 연관 검색어">
   <meta name="author" content="graycha">
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{ env('APP_NAME') }}::{{ env('BLPER') }} v{{ env('BLPER_VER') }}" />
@@ -34,30 +34,13 @@
   <form id="form" method="POST" onsubmit="return false;">
     <div class="header-container">
       <div class="row">
-        <!-- <div class="col-7">
-          <input type="text" class="form-control form-control-sm keywordInput" id="kw0" name="kw0" placeholder="키워드" autofocus required>
-        </div> -->
-
         <div class="input-group mb-5" style="padding-right: 30px;">
           <input type="text" class="form-control form-control-lg keywordInput" placeholder="키워드 입력" aria-describedby="button-addon" id="kw0" name="kw0" autofocus required>
           <button class="btn btn-outline-primary" type="button" id="go"><i class="fas fa-search"></i></button>
           <button class="btn btn-outline-success" type="button" id="reset"><i class="fas fa-sync-alt"></i></button>
-          <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#viewsMonthlyHisModal" id="history"><i class="fas fa-list"></i></button>
+          <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#viewsMonthlyTrendModal" id="trend"><i class="far fa-chart-bar"></i></button>
+          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#viewsMonthlyHisModal" id="history"><i class="fas fa-list"></i></button>
         </div>
-
-        <!-- <div class="col-5">
-          <div id="btnArea">
-            <button type="button" class="btn btn-outline-primary btn-action float-start mx-1" id="go">
-              <i class="fas fa-search"></i>
-            </button>
-            <button type="button" class="btn btn-outline-success btn-action float-start mx-1" id="reset">
-              <i class="fas fa-sync-alt"></i>
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-action float-start" data-bs-toggle="modal" data-bs-target="#viewsMonthlyHisModal" id="history">
-              <i class="fas fa-list"></i>
-            </button>
-          </div>
-        </div> -->
       </div>
     </div>
   </form>
@@ -65,7 +48,6 @@
 
 <main>
   <div class="main-container">
-
     <div class="row line0 d-none" id="monthlyReport">
       <div class="col py-1 line0-seg-1">
         <div class='report-form text-start' id="reportArea">
@@ -215,7 +197,7 @@
   <div class="modal-dialog modal-fullscreen-lg-down">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title" id="viewsMonthlyHisModalLabel"> 검색이력 - {{ date('Y-m-d') }} </h6>
+        <h6 class="modal-title" id="viewsMonthlyHisModalLabel"> 검색이력 {{ date('Y-m-d') }} </h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="viewsMonthlyHisModalBody">
@@ -235,6 +217,19 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Keyword Monthly His -->
+<div class="modal fade" id="viewsMonthlyTrendModal" tabindex="-1" aria-labelledby="viewsMonthlyTrendModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="viewsMonthlyTrendModalLabel"> 월별추이 {{ date('Y-m') }} </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex align-content-between flex-wrap" id="viewsMonthlyTrendModalBody"></div>
     </div>
   </div>
 </div>

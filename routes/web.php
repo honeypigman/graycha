@@ -37,3 +37,4 @@ Route::post('/blper/find', 'BlperController@find');
 Route::post('/blper/issue', 'BlperController@issue');
 Route::post('/blper/keyword', 'BlperController@keyword');
 Route::post('/blper/views', 'BlperController@views');
+Route::post('/blper/trend', 'BlperController@trend');

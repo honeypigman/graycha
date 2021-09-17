@@ -18,6 +18,9 @@ $(function () {
     // 실시간 키워드
     hotKeyword();
 
+    // 월별 트랜드
+    monthlyTrend();
+
     // 기본설정
     $("#kw0").focus();
 
@@ -177,7 +180,21 @@ $(function () {
             var tabs_id = addTabs(word);
             submit('GO', tabs, tabs_id);
         }
-    })
+    });
+
+    $(document).on("click", "canvas", function (e) {
+
+        $(".modal").modal("hide");
+        $("#kw0").val($(this).data('keyword'));
+        var word = validKeyword('kw0');
+
+        if (setInit()) {
+            // Add Tab and Submit
+            var tabs_id = addTabs(word);
+            submit('GO', tabs, tabs_id);
+        }
+
+    });
 
     var submit = function (action = null, tabs = null, id = null) {
 
@@ -410,6 +427,71 @@ $(function () {
                 } else {
                     var msg = "<div class='set-top text-muted'>- 검색결과 없음 -</div>";
                     $("#keywordList").empty().append(msg);
+                }
+            },
+            error: function (error) {
+                console.log('Error>' + error);
+            }
+        });
+    }
+
+    // 월별 트랜드 추이
+    function monthlyTrend() {
+        $.ajax({
+            method: "POST",
+            url: "/blper/trend",
+            dataType: 'JSON',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (rs) {
+
+                if (rs.code == '0000') {
+                    var cnt = 1;
+                    var chart = "";
+
+                    $.each(rs['items'], function (idx) {
+
+                        var id = 'trendChart_' + idx;
+
+                        // 초기화
+                        $('#' + id).remove();
+                        $('#viewsMonthlyTrendModalBody').append('<div class="flex-grow-1 ps-4"><canvas class="my-4 bchartjs-render-monitor" id="' + id + '"" data-keyword="' + this.keyword + '" ></canvas></div>');
+
+                        datas = {
+                            labels: this.period,
+                            datasets: [
+                                {
+                                    label: '추이',
+                                    backgroundColor: 'rgb(255 183 0 / 72%)',
+                                    fill: false,
+                                    data: this.ratio,
+                                    yAxisID: 'y-axis-1',
+                                }
+                            ]
+                        };
+
+                        var ctx = document.getElementById(id).getContext('2d');
+                        var { id } = new Chart(ctx, {
+                            type: 'bar',
+                            data: datas,
+                            options: {
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: this.keyword
+                                    },
+                                    legend: {
+                                        display: false
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                responsive: false
+                            }
+                        });
+
+                        cnt++;
+                    })
                 }
             },
             error: function (error) {

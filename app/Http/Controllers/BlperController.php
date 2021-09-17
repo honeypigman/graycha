@@ -11,6 +11,7 @@ use App\BlperRealtimeIssue;
 use App\BlperRealTimeKeyword;
 use App\BlperClientInfo;
 use App\BlperApiCount;
+use App\BlperRelationKeywordTrend;
 
 class BlperController extends Controller
 {
@@ -390,7 +391,7 @@ class BlperController extends Controller
         return $res;
     }
 
-    public function shallIapiCall($apiName){
+    private function shallIapiCall($apiName){
         
         $result = false;
         $today = date('Y-m-d');
@@ -488,5 +489,28 @@ class BlperController extends Controller
                 break;
             }
         }
+    }
+
+    public function trend(Request $request){
+
+        $date = date('Ym');
+        $list = BlperRelationKeywordTrend::select('no','keyword','period', 'ratio')
+        ->where('date', '=', $date)
+        ->where('status', '=', 'Y')
+        ->get();
+
+        $result = Array();
+        $result['code']='9999';
+
+        if(isset($list)){
+            foreach($list as $datas){                    
+                $result['items'][$datas->no]['keyword'] = $datas->keyword;
+                $result['items'][$datas->no]['period'] = $datas->period;
+                $result['items'][$datas->no]['ratio'] = $datas->ratio;
+                $result['code']=0000;
+            }
+        }
+
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 }

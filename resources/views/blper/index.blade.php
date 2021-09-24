@@ -3,6 +3,7 @@
 <head>
   <title>{{ env('BLPER') }} v{{ env('BLPER_VER') }}</title>
   <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url={{ env('BLPER_PROD_URL') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="블퍼::블로그 포스팅 작성을 위한 도우미 서비스">
   <meta name="keywords" content="실시간 이슈, 실시간 키워드, 키워드 추이, 월별 키워드 추이, 연관 검색어">
